@@ -1,0 +1,71 @@
+.form-box{
+    margin: 20px auto;
+    padding-top:15%;
+}
+
+.auth-box{
+    max-width: 100%;
+    width: 335px;    
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+}
+
+.auth-box__heading{
+    font-size: 20px;
+    margin-top: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.auth-box .input-account * {
+    border-radius: 0;
+    border-color: #ddd;
+}
+
+.input-group__label {
+    padding: 10.5px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+.input-group__label:first-child{
+    margin-bottom: 15px;
+}
+
+.input-group-addon:first-child {
+    border-right: 0;
+}
+
+.auth-control>button{
+    width: 100%;
+    background: #28303e;
+    color: #fff;
+}
+
+.auth-control>button:hover{
+    color: #fff;
+    background-color: #ea3a3c;
+}
+
+.reg-pass{
+    margin: 10px 0 0;
+    font-size: 15px;
+}
+
+.forget-password__link,
+.register__link{
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.forget-password__link:hover,
+.register__link:hover{
+    color: var(--primary-color);
+    text-decoration: none;
+}

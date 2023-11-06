@@ -1,0 +1,18 @@
+.shopping-guide__heading{
+    position: relative;
+    padding: 25px 30px 10px;
+    font-size: 18px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #161616;
+    display: table;
+}
+
+.shopping-guide__heading::after{
+    content: "";
+    float: right;
+    width: 27px;
+    background: #333;
+    height: 1px;
+    margin: 9px;
+}

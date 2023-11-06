@@ -1,0 +1,180 @@
+.cart-box-main{
+    padding: 25px 0px;
+}
+
+.odr-box a {
+    font-size: 18px;
+    color: #111111;
+    font-weight: 700;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.information-product{
+    display: flex;
+    align-items: center;
+}
+
+.product__image img{
+    width: 80px;
+    padding-right: 10px;
+}
+
+.media-body a:hover{
+    color: #111111;
+    text-decoration: none;
+}
+
+.text-muted {
+    padding: 10px 0px;
+}
+
+.order-box h3{
+    font-size: 16px;
+    color: #222222;
+    font-weight: 700;
+}
+.order-box h4 {
+    font-size: 16px;
+    padding: 0px;
+    line-height: 35px !important;
+    margin: 0;
+}
+.order-box .font-weight-bold{
+    font-size: 16px;
+}
+
+.payment__price{
+    align-items: center;
+}
+
+.gr-total h5 {
+    font-weight: 700;
+    color: #0996e2;
+    font-size: 18px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 35px !important;
+}
+.gr-total .h5{
+    margin: 0px;
+    font-weight: 700;
+    line-height: 35px;
+}
+
+.needs-validation .form-control {
+    min-height: 40px;
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 0 0 1px #d9d9d9;
+    transition: all 0.2s ease-out;
+    font-size: 14px;
+    color: #333;
+}
+.needs-validation .form-control:focus {
+    box-shadow: 0 0 0 2px #338dbc;
+    outline: none;
+}
+
+.title-left{
+    font-size: 16px;
+    border-bottom: 3px solid #010101;
+    margin-bottom: 20px;
+}
+.title-left h3{
+    font-weight: 700;
+}
+
+.shopping-box{
+    justify-content: center;
+}
+
+.btn-pay{
+    min-width: 200px;
+    min-height: 60px;
+}
+
+.shopping-box a{
+    font-size: 18px;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+}
+
+#totalprice{
+    font-size: 20px;
+}
+
+.smart-phone{
+    padding-left: 0;
+}
+
+.shipment{
+    display: flex;
+    justify-content: space-between;
+    height: 45%;
+    align-items: center;
+}
+
+.shipment__input .pay-wrapper img{
+    padding-left: 10px;
+}
+
+.shipment__radio{
+    width: 18px;
+    height: 18px;
+    box-shadow: 0 0 0 0 #338dbc inset;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    cursor: pointer;
+    vertical-align: -4px;
+    outline: 0;
+}
+
+.shipment__title{
+    padding-left: 6px;
+    margin: 0;
+    font-size: 16px;
+}
+
+.shipment__fee{
+    padding-top: 2px;
+    font-size: 16px;
+}
+
+.pay-product{
+    display: block;
+    height: auto;
+    padding: 0;
+}
+
+.pay-border{
+    border-bottom: 1px solid #e8e8e8;
+    width: 100%;
+    margin: 0;
+}
+
+.pay-wrapper{
+    padding: 6px 12px;
+}
+
+.pay-content{
+    background-color: #fafafa;
+    padding: 15px;
+}
+
+.pay-wrapper span{
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.pay-content__center{
+    text-align: center;
+}
+
+.pay-hidden{
+    display: none;
+}

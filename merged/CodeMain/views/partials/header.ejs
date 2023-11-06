@@ -1,0 +1,206 @@
+<!-- HEADER CONTENT BAR -->
+<div class="header__content-bar">
+    <div class="grid wide row">
+        <!-- LOGO -->
+        <div class="col-lg-3 col-md-3 col-sm-4">
+            <div class="header__navbar-logo">
+                <a href="/" class="header__navbar-logo-link" title="Họa Cụ DA ĐEN">
+                    <img src="/assets/image/logo.webp" alt="Họa Cụ DA ĐEN" class="header__navbar-logo-icon">
+                </a>
+            </div>
+        </div>
+        <!-- NAVBAR SEARCH -->
+        <div class="col-lg-5 col-md-5 col-sm-6">
+            <div class="header__navbar-search">
+                <input type="text" id="searchBox" placeholder="Nhập từ khóa tìm kiếm" class="header__navbar-search-input">
+                <button class="header__navbar-search-btn btn btn--primary">
+                    <i class="ti-search header__navbar-search-icon"></i>
+                </button>
+            </div>
+        </div>
+        <!-- NAVBAR ACCOUNT -->
+        <div class="col-xs-2 col-md-2 col-sm-1">
+            <div class="header__navbar-account">
+                <div class="header__navbar-account-menu">
+                    <% if (login) {%>
+                        <div class="header__menu-item dropdown">
+                            <p><b>Tài khoản</b></p>
+                            <div class="header__menu-item dropdown-menu" style="margin: 0;padding: 0;">
+                                <li class="header__menu-item-child"><a class="dropdown-item" href="/user/info"><span>Thông
+                                            tin tài khoản</span></a></li>
+                                <li class="header__menu-item-child"><a class="dropdown-item" href="/user/orders"><span>Đơn
+                                            hàng</span></a></li>
+                                <li class="header__menu-item-child"> <a class="dropdown-item" href="/auth/logout">
+                                        <span>Đăng xuất</span></a>
+                                </li>
+                            </div>
+                        </div>
+                        <%} else {%>
+                            <div class="header__navbar-account-menu">
+                                <div class="header__navbar-account-user">
+                                    <span>Tài khoản</span>
+                                </div>
+                                <div class="header__navbar-account-function">
+                                    <a href="/auth/login" class="header__navbar-account-login">
+                                        Đăng nhập,
+                                    </a>
+                                    <a href="/auth/register" class="header__navbar-account-register">
+                                        đăng ký
+                                    </a>
+                                </div>
+                            </div>
+                            <% }%>
+                </div>
+            </div>
+        </div>
+        <!-- NAVBAR CART -->
+        <div class="col-xs-2 col-md-2 col-sm-1">
+            <div class="header__cart-wrap">
+                <%- include('header_cart.ejs',{customerCart:locals.customerCart}) %>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- HEADER MENU BAR -->
+<div class="header__menu-bar">
+    <div class="grid wide row">
+        <ul class="header__menu-list">
+            <% header.forEach(h=> {%>
+                <li class="header__menu-item">
+                    <a href="<%=h.group.link%>" style="text-transform: uppercase;"
+                        class="header__menu-item-link">
+                        <%=h.group.name %>
+                    </a>
+                    <% if(typeof h.type !="undefined" && h.type.length>1) {%>
+                        <ul class="header__menu-list-child">
+
+                            <% h.type.forEach(t=>{%>
+                                <li class="header__menu-item-child">
+                                    <a href="/collections/<%= t.name %>" class="header__menu-item-link-child">
+                                        <%= t.name %>
+                                    </a>
+                                </li>
+                                <%})%>
+                        </ul>
+                        <%}%>
+
+                </li>
+                <%})%>
+                  
+        </ul>
+    </div>
+</div>
+<!--HEADER NAVBAR MOBILE-->
+<div class="header__navbar-mobile">
+    <div class="grid wide row">
+        <div class="col-md-1 col-sm-1 col-1">
+            <div class="nav_bar">
+                <label for="nav-mobile-input" class="ti-menu nav_bars-btn">
+                </label>
+            </div>
+            <input type="checkbox" hidden class="nav__input" id="nav-mobile-input">
+            <label for="nav-mobile-input" class="nav__overlay"></label>
+            <nav class="nav__mobile">
+                <ul class="navbar__mobile-list">
+                    <% header.forEach(h=> {%>
+                        <li class="navbar__mobile-item">
+                            <a href="javascript:void(0);" style="text-transform: uppercase;" data-toggle="collapse"
+                                class="navbar__mobile-item-link navbar__mobile-item-link-collapse">
+                                <%= h.group.name%>
+                                    <i class="ti-angle-right navbar__icon"></i>
+                            </a>
+                            <% if(typeof h.type !="undefined" && h.type.length>1) {%>
+                                <ul class="navbar__mobile-list-child collapse">
+
+                                    <% h.type.forEach(t=>{%>
+                                        <li class="navbar__mobile-item-child">
+                                            <a href="/collections/<%=t.name%>" style="text-transform: uppercase;"
+                                                class="navbar__mobile-item-link-child">
+                                                <%= t.name%>
+                                            </a>
+                                        </li>
+                                        <%})%>
+                                </ul>
+                                <%}%>
+
+                        </li>
+                        <%})%>
+                     
+                    <% if(login){%>
+                        <li class="navbar__mobile-item">
+                            <a href="javascript:void(0);" style="text-transform: uppercase;" data-toggle="collapse"
+                            class="navbar__mobile-item-link navbar__mobile-item-link-collapse">
+                                Tài khoản
+                                <i class="ti-angle-right navbar__icon"></i>
+                            </a>
+
+                            <ul class="navbar__mobile-list-child collapse">
+                                <li class="navbar__mobile-item-child">
+                                    <a href="/user/info" style="text-transform: uppercase;"
+                                        class="navbar__mobile-item-link-child">
+                                        Thông tin
+                                    </a>
+                                </li>
+                                <li class="navbar__mobile-item-child">
+                                    <a href="/user/orders" style="text-transform: uppercase;"
+                                        class="navbar__mobile-item-link-child">
+                                        Đơn hàng
+                                    </a>
+                                </li>
+                                <li class="navbar__mobile-item-child">
+                                    <a href="/auth/logout" style="text-transform: uppercase;"
+                                        class="navbar__mobile-item-link-child">
+                                        Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    <%} else {%>
+                        <li class="navbar__mobile-item">
+                            <a href="/auth/login" style="text-transform: uppercase;" 
+                            class="navbar__mobile-item-link">
+                                Đăng nhập
+                            </a>
+                        </li>
+                    <%}%>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-10 col-sm-10 col-10">
+            <div class="header__navbar-search header__navbar-search-mobile">
+                <input type="text" id="searchBox_mobile" value="" placeholder="Nhập từ khóa tìm kiếm" class="header__navbar-search-input">
+                <button class="header__navbar-search-btn btn btn--primary">
+                    <i class="ti-search header__navbar-search-icon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="header__navbar-mobile-cart">
+                <a href="/cart" class="ti-shopping-cart"></a>
+                <span class="nav-mobile-cart__notice"><%=customerCart.length%></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function search(){
+        let searchString = document.getElementById("searchBox").value || document.getElementById("searchBox_mobile").value;
+        window.location.href = `/search?q=${searchString}`
+    }
+    $('.header__navbar-search-input').on("keydown",function(e){
+        if(e.keyCode ==13) search();
+    })
+    $('.header__navbar-search-btn').click(function(){
+        search();
+    })
+
+</script>
+<script>
+    //Enable collapse for mobile's header link
+
+    $('.navbar__mobile-item-link-collapse').click(function(){
+        var $target = $(this).next();
+        $target.collapse('toggle');
+    })
+
+</script>

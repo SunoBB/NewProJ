@@ -1,0 +1,268 @@
+<link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet">
+<link href="/css/list_image_product.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.2.6/quill.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<% var rel = [] ;
+   var code = [];
+   var name = [];
+   var available=[];
+   var price = [];
+   products.forEach(element => {
+       rel.push(element.colors.join("|"));
+       code.push(element.productCode);
+       name.push(element.name);
+       available.push(element.quantity);
+       price.push(element.price);
+   });
+
+%> 
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>ADD NEW OUTBILL</h2>
+                <ul class="header-dropdown m-r--5">
+                </ul>
+            </div>
+            <div class="body">
+                    <form id="form_advanced_validation"></form>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="productname" id="username">
+                            <label class="form-label">Tên nguời nhận</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="productcode"  id="userphone">
+                            <label class="form-label">Số Điện Thoại</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="quantity" id="email" >
+                            <label class="form-label">Email</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="price" id="address">
+                            <label class="form-label">Địa chỉ giao hàng</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <% 
+                        const listPay=[
+                        { name:"Thanh toán khi nhận hàng",alias:"0"},
+                        { name:"Thanh toán trực tiếp",alias:"1"},
+                        { name:"Thẻ tín dụng",alias:"2"},
+                        { name:"Trả góp",alias:"3"}]
+                        
+                        %>
+                    <div class="form-group form-float">
+                        <div class="form-line" style="text-transform: capitalize;">
+                            <label for="selectPay">Phương Thức Thanh Toán</label>
+                            <select id="selectPay" style="text-transform: capitalize;" name="grouptype" class="selectBrand">
+                               <% listPay.forEach(optionPay =>{%>
+                                        <option style="text-transform: capitalize;" value=<%= optionPay.alias %>><%=optionPay.name%></option>
+                               <%})%>
+                            </select>
+                    </div>
+                 <br>
+                    <div class="form-group form-float col-md-9">
+                            <div class="form-group form-float">
+                                <label for="product">Sản phẩm</label>
+                                <select name="product" class="form-control" id="product">
+                                    <%  products.forEach(product => {  %>
+                                        <option value="<%= product.productCode %>"><%= product.name %></option>
+                                   <% }); %>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-float col-md-3"> 
+                            <div class="form-line" style="text-transform: capitalize;">
+                                <label for="colorOption">Option</label>
+                                <select  id="colorOption">
+
+                                </select>
+                                <input style="text-transform: capitalize;" type="text" class="form-control" value="" name="quantity" id="quantity" placeholder="nhập số lượng">
+                            </div>
+                            
+                        </div>
+                        <button type="button" class="btn btn-primary" id="btnAddProduct">Thêm</button>
+                        <table class="table table-hover" id="tablePay">
+                            <thead>
+                               <tr>
+                                   <th>Mã Sản Phẩm</th>
+                                  <th>Tên Sản Phẩm</th>
+                                  <th>Giá </th>
+                                  <th>Màu</th>
+                                  <th>Số Lượng</th>
+                               </tr>
+                            </thead>
+                            <tbody id="tableProduct">
+                               
+                            </tbody>
+                         </table>
+                    <h3>Tổng tiền : </h3> <p id="totalPrice">0</p>
+                    <textarea class="textarea" id="description" name="description"></textarea>
+                    <div id="list-product-image" class="grid-list-img"> </div>
+                    </div>
+                   
+                    <button class="btn btn-primary waves-effect" id="addBill"  >Thêm hóa đơn</button>
+                  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#description').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 420,
+        });
+
+    $('#addBill').click(function(){
+        var username = $('#username').val();
+            var userphone = $('#userphone').val();
+            var email = $('#email').val();
+            var address = $('#address').val();
+            var rel = "[";
+
+            $('#tablePay').find("tr").each(function (index, element) {
+                var test = [];
+                if (index > 0) {
+                    $(element).find('td').each(function (index, element) {
+                        var colVal = $(element).text();
+                        test.push(colVal);
+                    });
+                    var option = {
+                        "productCode": test[0],
+                        "name": test[1],
+                        "price": test[2],
+                        "color": test[3],
+                        "quantity": test[4]
+                    }
+                    var json = JSON.stringify(option);
+                    rel += json + ",";
+                }
+            }
+            );
+            rel = rel.substring(0, rel.length - 1);
+            rel += "]";
+            console.log("result :" + rel);
+            var productJson = JSON.parse(rel);
+            var totalprice = parseInt($('#totalPrice').text().replace(".", "").replace(" đ", ""));
+            var note = $('#description').val();
+            var addressShip = $('#address').val();
+            var typePay = $('#selectPay').val();
+            var user = {
+                name: username,
+                phone: userphone,
+                email: email
+            }
+            var myJson = JSON.stringify(
+                {
+                    totalprice: totalprice,
+                    note: note,
+                    products: productJson,
+                    user: user,
+                    addressShip: address,
+                    typePay: typePay
+                }
+            )
+            $.ajax({
+                url: '/bill/add',
+                data: myJson,
+                type: "POST",
+                method: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    alert(data)
+                },
+                error: function (data) {
+                    alert(data)
+                }
+            })
+    })
+    $('#product').change(function(){
+        var precolors = '<%= rel %>'.split(',');
+        var codesproduct = '<%- code %>'.split(",");
+        let idProduct = $('#product').val();
+        console.log(precolors);
+        console.log(codesproduct);
+        console.log(idProduct);
+        let colors = [];
+           for (c of codesproduct) {
+            if (c == idProduct) {
+                var index = codesproduct.indexOf(c);
+                console.log(index);
+                colors = precolors[index].split("|");
+                break;
+            }
+        }
+        console.log(colors);
+
+        $('#colorOption').empty();
+        for (color of colors) {
+            $("#colorOption").append('<option style="text-transform: capitalize;" value="' + color + '">' + color + '</option>');
+        }
+        $('#colorOption').selectpicker('refresh');
+    })
+    $('#btnAddProduct').click(function(){
+        var codesproduct = '<%- code %>'.split(",");
+        var nameProduct =  '<%- name %>'.split(",");
+        var availableProduct =  '<%- available %>'.split(",");
+        var pricesProduct = '<%- price %>'.split(",");
+        var isAvailabe = false;
+        var name ;
+        var price =0 ;
+        var code = $('#product').val();
+        var color = $('#colorOption').val();
+        var quant = $('#quantity').val();
+        var totalPrice = $('#totalPrice').text().replace(".","").replace(" đ","");
+        totalPrice = parseInt(totalPrice);
+        console.log("totalPrice"+totalPrice)
+        console.log(name);
+        console.log(color);
+        console.log(quant);
+        for (c of codesproduct) {
+            if (c == code) {
+                var index = codesproduct.indexOf(c);
+                name= nameProduct[index];
+                if(quant<=availableProduct[index]){
+                    isAvailabe=true;
+                }
+                price = pricesProduct[index];
+                break;
+            }
+        }
+        if(isAvailabe==false) {
+            alert("Oop ! không đủ hàng rồi br !")
+        }
+        else{
+            totalPrice+= price*quant; 
+            totalPrice = String(parseInt(totalPrice));
+            var total = totalPrice.substring(0,totalPrice.length-3)+'.'+totalPrice.substring(totalPrice.length-3,totalPrice.length);
+            console.log("abcxyz :"+total);
+            $('#tableProduct').append('<tr><td>'+code+'</td> <td>'+name+'</td> <td>'+price+'</td> <td>'+color+'</td> <td>'+quant+'</td> <td><button type="button" onclick="removeProduct(this)" class="btn btn-danger deleteOption">Delete</button></td> </tr>')
+            $('#totalPrice').text(total+' đ');
+        }
+    });
+    function removeProduct(btn) {
+            $(btn).parent().parent().remove();
+        }
+  </script>

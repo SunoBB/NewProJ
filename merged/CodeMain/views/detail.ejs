@@ -1,0 +1,402 @@
+<%    const  numberWithCommas = (number)=>{
+    return number.toString().replace(
+        /\B(?=(\d{3})+(?!\d))/g,
+        ","
+    );
+}
+%> 
+<div class="bread-crumb-background">
+    <div class="container">
+     <div class="row">
+         <div class="row">
+             <div class="col-12">
+                 <ul class="bread-crumb">
+                     <li class="bread-crumb-item">
+                         <a href="/" class="bread-crumb-heading">
+                             Trang Chủ
+                         </a>
+                     </li>
+                     <li class="bread-crumb-item">
+                         <i class="ti-angle-right"></i>
+                         <%=product.name%>
+                     </li>
+                   
+                 </ul>
+             </div>
+         </div>
+     </div>
+    </div>
+ </div>
+<div class="product_wrapper" style="background: #f5f5f5 ;">
+    <div class="grid wide row">
+        <div class="col-xs-12 col-lg-12" style="margin-top:15px">
+            <div class="product-detail__title">
+                <div class="product-detail__heading">
+                    <h1><%=product.name%></h1>
+                </div>
+                <div class="product-detail__brand">
+                    <span>Thương hiệu:</span>
+                    <a href="/collections/vendors?q=<%=product.brand%>" class="product-detail__brand-link"><%=product.brand%></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-12">
+            <div class="product-detail__information">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 product-detail__hidden" style="padding: 15px 5px;">
+                                <div class="product-detail__select-img" style="height: 365px;">
+                                    <div class="select-img-wrapper">
+                                        <ul class="product-detail__select-list">
+                                           <% product.images.forEach((image,i)=>{%>
+                                            <li class="product-detail__select-item">
+                                                <a href="" class="product-detail__select-link">
+                                                    <img src='<%=image%>'' alt="" class="product-detail__img-small">
+                                                </a>
+                                            </li>
+                                           <%})%>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-left: 0px;">
+                                <div class="product-detail__img-full">
+                                    <img class="product-detail__img" src="<%=product.images[0]%>" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
+                        <div class="short_descrition_tab"></div>
+                        <div class="product-type">
+                            <div class="product-type__wrapper">
+                                <span class="product-type__title">Loại</span>
+                                <ul class="product-type__list">
+                                    <!-- <li class="product-type__item">
+                                        <label for="selectType">
+                                            <input id="selectType" type="radio" checked="checked" value="ToneGray" name="OptionType" class="selectActive">
+                                            <span>Tone Gray</span>
+                                        </label>
+                                    </li>
+                                    <li class="product-type__item">
+                                        <label for="selectType1">
+                                            <input id="selectType1" type="radio" value="ToneBrown" name="OptionType">
+                                            <span>Tone Brown</span>
+                                        </label>
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-price">
+                            <div class="product-price__current">
+                                <%= numberWithCommas(product.price)%>đ
+                            </div>
+                            <!-- <div class="product-price__past">
+                                <span>Giá trước đây:</span>
+                                <del>120,000₫</del>
+                            </div>
+                            <div class="product-price__percent">
+                                <span>Tiết kiệm:</span>
+                                <b>8%</b>
+                            </div> -->
+                        </div>
+                        <div class="product-quantity">
+                            <span>Số Lượng:</span>
+                            <div class="buttons_added">
+                                <input class="minus is-form" type="button" value="-">
+                                <input id="quantity" aria-label="quantity" class="input-qty" max="1000" min="1" name="" type="number" value="1">
+                                <input class="plus is-form" type="button" value="+">
+                            </div>
+                        </div>
+                        <div class="product-detail__controls">
+                            <button class="btn btn-add-to-cart" id="btnAddProduct">
+                                <span class="ti-shopping-cart btn-control__cart-icon"></span>
+                                <span>Thêm Vào Giỏ</span>
+                            </button>
+                            <button class="btn btn-buy-now" id="buynow">
+                                <span class="ti-check btn-control__buy-icon"></span>
+                                <span>Mua Ngay</span>
+                            </button>
+                        </div>
+                        <div class="product-detail__tags">
+                            <label for="">Tags:</label>
+                            <ul class="tags__list">
+                                <li class="tags__item">
+                                    <a href="" class="tags__link">BÚT LINE,</a>
+                                </li>
+                                <li class="tags__item">
+                                    <a href="" class="tags__link">BÚT,</a>
+                                </li>
+                                <li class="tags__item">
+                                    <a href="" class="tags__link">Marvy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-xs-12">
+                        <div class="service-product">
+                            <div class="service-product__header">
+                                <div class="service-product__title">
+                                    Nhận Ship đơn từ 100K
+                                </div>
+                                <div class="service-product__content">
+                                    từ 1-7 ngày làm việc
+                                </div>
+                            </div>
+                            <div class="service-product__type">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-3 col-xs-12">
+                                        <div class="service-product__type-border">
+                                            <div class="service-product__type-wrapper">
+                                                <div class="service-product__type-image">
+                                                    <img src="https://theme.hstatic.net/1000107366/1000415407/14/icon-service-1.png?v=320" alt="">
+                                                </div>
+                                                <div class="service-product__type-content">
+                                                    <div class="service-product__type-title">
+                                                        Giao hàng miễn phí với
+                                                    </div>
+                                                    <div class="service-product__type-text">
+                                                        HCM : 600K  - Toàn quốc : 1,000K
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-sm-3 col-xs-12">
+                                        <div class="service-product__type-border">
+                                            <div class="service-product__type-wrapper">
+                                                <div class="service-product__type-image">
+                                                    <img src="https://theme.hstatic.net/1000107366/1000415407/14/icon-service-2.png?v=320" alt="">
+                                                </div>
+                                                <div class="service-product__type-content">
+                                                    <div class="service-product__type-title">
+                                                        Đổi trả miễn phí
+                                                    </div>
+                                                    <div class="service-product__type-text">
+                                                        Đổi trả miễn phí nếu lỗi của nhà sản xuất
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-sm-3 col-xs-12">
+                                        <div class="service-product__type-border">
+                                            <div class="service-product__type-wrapper">
+                                                <div class="service-product__type-image">
+                                                    <img src="https://theme.hstatic.net/1000107366/1000415407/14/icon-service-3.png?v=320" alt="">
+                                                </div>
+                                                <div class="service-product__type-content">
+                                                    <div class="service-product__type-title">
+                                                        Thanh toán
+                                                    </div>
+                                                    <div class="service-product__type-text">
+                                                        Shipcod toàn quốc
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-sm-3 col-xs-12">
+                                        <div class="service-product__type-border">
+                                            <div class="service-product__type-wrapper">
+                                                <div class="service-product__type-image">
+                                                    <img src="https://theme.hstatic.net/1000107366/1000415407/14/icon-service-4.png?v=320" alt="">
+                                                </div>
+                                                <div class="service-product__type-content">
+                                                    <div class="service-product__type-title">
+                                                        Hỗ trợ online
+                                                    </div>
+                                                    <div class="service-product__type-text">
+                                                        0909738828
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid wide row">
+        <div class="col-lg-8 col-xs-12">
+            <div class="product-comment">
+                <div class="product-comment__wrapper">
+                    <div class="product-comment__title">
+                        <h3>Giới thiệu về sản phẩm <%= product.name%></h3>
+                    </div>
+                    <div class="product-comment__description">
+                        <div class="product-comment__description-wrapper">
+                          <%- product.description%>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-comment__wrapper">
+                    <div class="product-comment__title">
+                        <h3>Bình luận</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xs-12">
+            <div class="product-comment">
+                <div class="product-comment__wrapper">
+                    <div class="product-comment__title">
+                        <h3>SẢN PHẨM LIÊN QUAN</h3>
+                    </div>
+                    <ul class="product-related__list">
+                        <% let products = locals.similarProducts%>
+                        <% products.forEach(p => {%>
+                            <li class="product-related__item">
+                                <a href="/products/<%=p.productCode%>" class="product-related__link-img">
+                                    <img src="<%=p.images[0]%>" alt="">
+                                </a>
+                                <a href="/products/<%=p.productCode%>" class="product-related__link">
+                                    <h2 class="product-related__heading"><%=p.name%></h2>
+                                    <p class="product-related__price">
+                                        <span><%=numberWithCommas(p.price)%>đ</span>
+                                    </p>
+                                </a>
+                            </li>
+                        <%})%>
+                       
+                        <!-- <li class="product-related__item">
+                            <a href="" class="product-related__link-img">
+                                <img src="/assets/image/UNIPin-200.webp" alt="">
+                            </a>
+                            <a href="" class="product-related__link">
+                                <h2 class="product-related__heading">Bộ bút line 7 size UNI Pin-200 chính hãng</h2>
+                                <p class="product-related__price">
+                                    <span>210,000₫</span>
+                                    <span class="product-relate__price-old">
+                                        250,000₫
+                                    </span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="product-related__item">
+                            <a href="" class="product-related__link-img">
+                                <img src="/assets/image/MarvyUchida.webp" alt="">
+                            </a>
+                            <a href="" class="product-related__link">
+                                <h2 class="product-related__heading">Bộ Bút Line Kháng Nước Marvy Uchida Chính Hãng</h2>
+                                <p class="product-related__price">
+                                    <span>200,000₫</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="product-related__item">
+                            <a href="" class="product-related__link-img">
+                                <img src="/assets/image/MICRONSAKURA.webp" alt="">
+                            </a>
+                            <a href="" class="product-related__link">
+                                <h2 class="product-related__heading">Bộ Full Nét Bút Line MICRON SAKURA Chính Hãng</h2>
+                                <p class="product-related__price">
+                                    <span>240,000₫</span>
+                                </p>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="banner-index">
+                <a href="">
+                    <picture>
+                        <img src="https://theme.hstatic.net/1000107366/1000415407/14/banner_product_1.jpg?v=320" alt="">
+                    </picture>
+                </a>
+            </div>
+            <div class="banner-index">
+                <a href="">
+                    <picture>
+                        <img src="https://theme.hstatic.net/1000107366/1000415407/14/banner_product_2.jpg?v=320" alt="">
+                    </picture>
+                </a>
+            </div>
+            <div class="banner-index">
+                <a href="">
+                    <picture>
+                        <img src="https://theme.hstatic.net/1000107366/1000415407/14/banner_product_3.jpg?v=320" alt="">
+                    </picture>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".plus").click(function(){
+        let value = Number($(".input-qty").val())
+        value = value + 1;
+        $(".input-qty").prop("value",value); 
+    })
+    $(".minus").click(function(){
+        let value = Number($(".input-qty").val());
+        if(value>1){
+            value = value - 1;
+            $(".input-qty").prop("value",value); 
+        }
+    })
+    $('#btnAddProduct').click(function(){
+        var code = '<%- product.productCode %>'
+        var quantity = $('#quantity').val();
+        if(quantity><%- product.quantity %>){
+            $.notify("Opp ! Số hàng đặt vượt quá số lượng sản phẩm có sẵn !",{className: "warn"});
+            return;
+        }
+        var myJson =JSON.stringify( {
+            code: code,
+            quantity:quantity,
+            typechange:0
+        });
+        console.log("code :" + code);
+        console.log('quant :' + quantity);
+        $.ajax({
+                url: '/cart/addOrUpdate',
+                data: myJson,
+                type: "post",
+                method: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $.notify("Thêm thành công !",{className: "success"});
+                    console.log(data)
+                },
+                error: function (data) {
+                    alert(data)
+                    console.log(data)
+                }
+            }
+            )
+    })
+    $('#buynow').click(function(){
+        var code = '<%- product.productCode %>'
+        var quantity = $('#quantity').val();
+        if(quantity><%- product.quantity %>){
+            $.notify("Opp ! Số hàng đặt vượt quá số lượng sản phẩm có sẵn !",{className: "warn"});
+            return;
+        }
+        var myJson =JSON.stringify( {
+            code: code,
+            quantity:quantity,
+            typechange:0
+        });
+        $.ajax({
+                url: '/cart/addOrUpdate',
+                data: myJson,
+                type: "post",
+                method: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    window.location.replace("/checkout");
+                },
+                error: function (data) {
+                    alert(data)
+                    console.log(data)
+                }
+            }
+            )
+    })
+</script>

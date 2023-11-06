@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/mainbase.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/mobile.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="/scripts/signup.js"></script>
+    <title>Họa cụ Chính hãng, Chất lượng - Họa Cụ DA ĐEN</title>
+</head>
+<body>
+    <div class="app">
+
+        <!--END HEADER-->
+
+        <!-- BEGIN MAIN -->
+        <main>
+            <div class="grid wide row">
+                <div class="col-xs-12 form-box">
+                    <i class=""></i>
+                    <div id="register" class="auth-box">
+                        <h1 class="auth-box__heading">ĐĂNG KÝ</h1>
+                        
+                            <div class="input-group input-account">
+                                <label class="input-group__label">
+                                    <i class="input-group__icon ti-email"></i>
+                                </label>
+                                <input type="email" id="txtEmail" name="email" required placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Email không đúng định dạng" class="form-control">
+                            </div>
+                            <div class="input-group input-account">
+                                <label class="input-group__label">
+                                    <i class="input-group__icon ti-lock"></i>
+                                </label>
+                                <input type="password" id="txtPassword" name="password" required placeholder="Mật khẩu" class="form-control">
+                            </div>
+                            <div class="input-group input-account">
+                                <label class="input-group__label">
+                                    <i class="input-group__icon ti-user"></i>
+                                </label>
+                                <input type="text" id="txtLastName" name="lastname" placeholder="Họ" class="form-control">
+                            </div>
+                            <div class="input-group input-account">
+                                <label class="input-group__label">
+                                    <i class="input-group__icon ti-user"></i>
+                                </label>
+                                <input type="text" id="txtFirstName" name="firstname" required placeholder="Tên" class="form-control">
+                            </div>
+                            <div class="auth-control">
+                                <button id="btnSignup" class="btn">
+                                    ĐĂNG KÝ
+                                </button>
+                            </div>
+                            <div id="labelResult" class="text-danger">
+
+                            </div>
+                            <% if(typeof message !== "undefined") {%>
+                             <% if(message){%>
+                                <p class="text-danger"><%=message%></p>
+                            <%}}%>
+                            <% if(typeof success !== "undefined") {%>
+                                <% if(success){%>
+                                   <p class="text-success"><%=success%></p>
+                               <%}}%>
+                            <div class="login-control">
+                                Có tài khoản? 
+                                <a href="/auth/login" class="login__link">
+                                    Đăng nhập
+                                </a>
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- END MAIN -->
+
+   
+    </div>
+</body>
+<script>
+    function checkEmail(){
+        $('#labelResult').removeClass('text-danger').removeClass('text-sucess');
+        let email = $('#txtEmail').val().trim();
+        let regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        let result = regex.test(email);
+        if(result == true){
+            return true;
+        }
+        else{
+            $('#labelResult').addClass('text-danger');
+            $('#labelResult').html('Email không đúng định dạng. Ví dụ: abc@gmail.com')
+            return false;
+        }
+    }
+    $("#btnSignup").click(function(){
+    
+    let email = $("#txtEmail").val().trim();
+    let password = $("#txtPassword").val().trim();
+    let firstname = $("#txtFirstName").val().trim();
+    let lastname = $("#txtLastName").val().trim();
+    let info = {
+        email : email,
+        password: password,
+        firstname: firstname,
+        lastname: lastname
+    }
+    let mydata = JSON.stringify(info);
+    if(email != "" && password !="" && firstname != "" && lastname!="" && checkEmail()==true){
+        $.ajax({
+            url: '/auth/register',
+            data: mydata,
+            type: 'post',
+            method: 'POST',
+            contentType : "application/json; charset=utf-8",
+            success: function(data){
+                var labelResult = $("#labelResult");
+                labelResult.removeClass();
+                labelResult.addClass('text-success');
+                labelResult.html(data)
+            },
+            error: function(data){
+                var labelResult = $("#labelResult");
+                labelResult.removeClass();
+                labelResult.addClass('text-danger');
+                labelResult.html(data.responseText)
+            }
+        })
+    }
+})   
+</script>
+</html>

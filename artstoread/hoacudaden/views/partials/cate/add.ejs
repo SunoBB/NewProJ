@@ -1,0 +1,161 @@
+<link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet">
+<link href="/css/list_image_product.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.2.6/quill.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>ADD NEW </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                    <form id="form_advanced_validation"></form>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="catename" id="catename">
+                            <label class="form-label">Tên thể loại</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <form id="form_advanced_validation"></form>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="catename" id="catetype">
+                            <label class="form-label">kiểu thể loại ( cách nhau bằng dấu "|")</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line" style="text-transform: capitalize;">
+                            <label for="selectBrand">Trạng thái</label>
+                        <select id="selectactive" style="text-transform: capitalize;" name="grouptype" class="selectBrand">
+                              
+                         <option style="text-transform: capitalize;" value="true">hoạt động</option>
+                         <option style="text-transform: capitalize;" value="false">vô hiệu hóa</option>
+                             
+                        </select>
+                    </div>
+                    </div>
+                    <div id="list-product-image" class="grid-list-img"> </div>
+                    <div class="row clearfix" style="margin-top: 15px;">
+                        <div class="from-group form-float">
+                            <div class="col-sm-12">
+                                <div class="form-line">
+                                    <label class="form-label">Ảnh đại diện</label>
+                                    <input type="file" class="form-control" name="image" value="" id="file">
+                                    <button id="btnAddImage" style="margin-top: 7px;">Thêm Ảnh</button>
+                                    <div id="loading">
+                                                <p><img src="/images/ajax-loader.gif"/>Vui lòng chờ !</p>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary waves-effect" id="addCate"  >Thêm thể loại</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function (e) {
+            $('#loading').hide();
+
+        });
+    $('#addCate').click(function(){
+        var name = $('#catename').val().trim();
+        var catetype = $('#catetype').val().trim().split("|");
+        catetype.forEach(element => {
+                element= element.trim();
+            });
+        var isactive = $('#selectactive').val() == 'true' ? true : false;
+        var image = $('#list-product-image .grid-item .img-container .img-div img').attr('src');
+        var data = {
+            group: name,
+            type: catetype,
+            isactive: isactive,
+            image: image
+        }
+        $.ajax({
+                url: '/cate/add',
+                data: JSON.stringify(data),
+                type: 'post',
+                method: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    alert(data)
+                },
+                error: function (data) {
+                    alert(data)
+                }
+            }
+            )
+    });
+    $('#btnAddImage').click(function () {
+            $('#loading').show();
+            $('#btnAddImage').prop('disabled', true);
+            $('#file').prop('disabled', true);
+            var file_data = $('#file').prop('files')[0];
+            if (file_data == null) {
+                alert('vui long chon anh');
+            }
+            else {
+                var form_data = new FormData();
+                form_data.append('file', file_data);
+                $.ajax({
+                    url: '/upload', // point to server-side controller method
+                    cache: false,
+                    enctype: 'multipart/form-data',
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    method: 'POST',
+                    success: function (response) {
+                        $('#list-product-image').html('<div class="grid-item">\n' +
+                            '                                                                    <div class="img-container">\n' +
+                            '                                                                        <div class="img-div">\n' +
+                            '                                                                            <img src="' + response + '" alt="product img">\n' +
+                            '                                                                        </div>\n' +
+                            '                                                                    </div>\n' +
+                            '                                                                    <div class="remove-img" onclick="removeProductImage(this)">\n' +
+                            '                                                                        <i class="fas fa-times"></i>\n' +
+                            '                                                                    </div>\n' +
+                            '                                                                    \n' +
+                            '                                                                </div>');
+                        $('#loading').hide();
+                        $('#btnAddImage').prop('disabled', false);
+                        $('#file').prop('disabled', false);
+                    },
+                    error: function (response) {
+                        alert('ảnh không hợp lệ ! Vui lòng chọn ảnh khác hoặc xem lại định dạng ảnh ! ');
+                        $('#loading').hide();
+                        $('#btnAddImage').prop('disabled', false);
+                        $('#file').prop('disabled', false);
+                    }
+                });
+            }
+        });
+</script>
+
+

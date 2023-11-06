@@ -1,0 +1,123 @@
+.contact-left,
+.contact-right{
+    margin: 10px 0 0 15px;
+}
+
+.contact-left__title,
+.contact-right__title{
+    width: 100%;
+    float: left;
+    position: relative;
+    font-size: 14px;
+    line-height: 14px;
+    margin: 5px 0 15px;
+    overflow: hidden;
+    display: flex;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #ddd;
+}
+
+.contact-left__title-icon{
+    color: #000;
+    padding: 0 10px 0 4px;
+}
+
+.contact-left__title-heading,
+.contact-right__title-heading{
+    color: #333;
+    font-weight: 700;
+    background: #fff;
+    margin-right: 8px;
+}
+
+.form-contact{
+    margin-bottom: 20px;
+}
+
+.form-contact__input{
+    display: flex;
+    align-items: center;
+    margin: 0 0 10px;
+}
+
+.form-control{
+    border-radius: 0;
+    font-size: 14px;
+}
+
+.form-contact__input-addon{
+    padding: 10.5px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.form-contact__text{
+    border: 1px solid #ccc;
+}
+
+.form-textarea{
+    width: 100%;
+    margin-bottom: 10px;
+    height: 100%;
+}
+
+.form-contact__textarea{
+    width: 100%;
+    height: 122px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+textarea.form-control{
+    height: 100%;
+}
+
+.contact-btn__control{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-btn{
+    color: #fff;
+    background: #333;
+    border: 1px solid #333;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 7px 15px;
+    position: relative;
+    width: auto;
+    white-space: nowrap;
+    margin-top: 20px;
+}
+
+.contact-btn:hover{
+    color: #fff;
+    background: #333;
+}
+
+.contact-right__address{
+    width: 100%;
+    float: left;
+    position: relative;
+    font-size: 14px;
+    line-height: 14px;
+    margin: 0 0 18px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+}
+
+.contact-right__icon{
+    font-size: 14px;
+    width: 20px;
+    text-align: center;
+    padding-right: 25px;
+}

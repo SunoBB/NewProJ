@@ -1,0 +1,273 @@
+.slider-main{
+    background-color: #f5f5f5;
+
+}
+
+.slider-main__wrap{
+    position: relative;
+    z-index: 1;
+}
+
+.slider-main__stage{
+    width: 100%;
+    height: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slider-main__list{
+    list-style: none;
+    height: 100%;
+    width: 6800px;
+    transform: translate3d(-5440px, 0px, 0px);
+    transition: all 0.25s ease 0s;
+    display: flex;
+    overflow: hidden;
+}
+
+.slider-main__item{
+    width: 20%;
+}
+
+.slider-main__link{
+    display: block;
+}
+
+.slider-main__img{
+    width: 100%;
+}
+
+.slider-main__controls{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    height: 20px;
+    width: 160px;
+}
+
+.slider-main__controls-list{
+    list-style: none;
+    height: 100%;
+    display: flex;
+}
+
+.slider-main__controls-item{
+    display: inline-block;
+    zoom: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.slider-main__controls-list span{
+    opacity: 1;
+    color: #fff;
+    margin: 0 0 0 10px;
+    background: #fff;
+    display: block;
+    width: 20px;
+    height: 100%;
+    border-radius: 50%;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.group-index{
+    background-color: #f5f5f5;
+    padding-bottom: 20px;
+}
+
+.slide-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 59px 10px;
+}
+
+.slide-title__heading{
+    font-size: 18px;
+    margin: 0;
+}
+
+.slide-title__viewall{
+    flex: 1 1 0;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    text-align: right;
+}
+
+.slide-title__viewall-link{
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.slide-title__viewall-link:hover{
+    color: #0e8291;
+    text-decoration: none;
+}
+
+.slide-banner{
+    padding-right: 0;
+}
+
+.slide-banner__img{
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.slide-product{
+    padding: 0;
+    background-color: #fff;
+    position: relative;
+}
+
+.slide-product__wrap{
+    height: 100%;
+}
+
+.slide-product__information{
+    height: 100%;
+}
+
+.slide-product__stage{
+    height: 100%;
+}
+
+
+.slide-product__list{
+    list-style: none;
+    display: flex;
+    padding: 0 15px;
+    justify-content: space-around;
+    margin: 0;
+    height: 100%;
+}
+
+.slide-product__item{
+    width: 220.5px;
+    padding: 0 1px;
+}
+
+.slide-product__link{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.slide-product__img{
+    width: 100%;
+}
+
+.slide-product__detail{
+    width: 100%;
+    padding: 0 5px;
+}
+
+.slide-product__heading-link{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.slide-product__heading-link:hover{
+    color: #0e8291;
+    text-decoration: none;
+}
+
+.slide-product__heading{
+    font-size: 14px;
+    overflow: hidden;
+    height: 32px;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}
+
+.slide-product__price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.slide-product__price--new{
+    font-size: 15px;
+    color: #d80027;
+    font-weight: bold;
+}
+
+.slide-product__price--old{
+    text-decoration: line-through;
+    color: #7d7d7d;
+    font-size: 14px;
+}
+
+.slide-product__article{
+    font-size: 13px;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}
+
+.slide-product__prev{
+    position: absolute;
+    left: 0.1%;
+    top: 45%;
+    cursor: pointer;
+}
+
+.slide-product__next{
+    position: absolute;
+    right: 0.1%;
+    top: 45%;
+    cursor: pointer;
+}
+
+.slide-product__controls-icon{
+    font-size: 14px;
+}
+
+.slide-product__controls-icon:hover{
+    color: #f89d4c;
+}
+
+.slide-brand__list{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.slide-brand__item{
+    margin-right: 15px;
+}
+
+.slide-brand__img{
+    width: auto;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+.owl-prev{
+    position: absolute;
+    left: -5px;
+    top: 45%;
+}
+.owl-next{
+    position: absolute;
+    right: -5px;
+    top: 45%;
+}
+.owl-theme .owl-nav [class*=owl-]:hover {
+    background: #fff !important;
+    color: #f89d4c !important;
+    text-decoration: none;
+    border:0px !important;
+    border:none !important;
+}
+.owl-theme .owl-nav [class*=owl-]:focus {
+    outline: none !important;
+}
+
+.slider-main__stage ul{
+    margin:0;
+}

@@ -1,0 +1,548 @@
+<%    const  numberWithCommas = (number)=>{
+    return number.toString().replace(
+        /\B(?=(\d{3})+(?!\d))/g,
+        ","
+    );
+}
+var total=0;
+var totalprice = 0;
+customerCart.forEach(element => {
+    total+= parseInt(element.quantity);
+    totalprice+= parseInt(element.quantity)*parseInt(element.price);
+});
+%> 
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-lg-7 col-sm-12 mb-3">
+                <div class="checkout-address">
+                    <div class="title-left">
+                        <h3>Điền thông tin nhận hàng</h3>
+                    </div>
+                    <form class="needs-validation" novalidate>
+                        <div class="row mb-3">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" id="shipName" name="shipName" placeholder="Họ Và Tên Người Nhận" value="" required>
+                                <div class="invalid-feedback" > Bạn phải nhập họ và tên </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-8 col-xs-12 col-sm-12">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                <div class="invalid-feedback"> Vui lòng nhập email </div>
+                            </div>
+                            <div class="col-lg-4 col-xs-12 col-sm-12 smart-phone">
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Số Điện Thoại">
+                                <div class="invalid-feedback"> Vui lòng nhập số điện thoại </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-12 col-xs-12">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Địa Chỉ" required>
+                                <div class="invalid-feedback"> Vui lòng nhập địa chỉ nhận hàng </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3 col-xs-12">
+                                <select name="ls_provinces" id="provinces" required="" class="provinces__name form-control">
+                                    <option value="9000">Tỉnh / Thành phố</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3 col-xs-12">
+                                <select name="ls_district" id="district" required="" class="districts__name form-control">
+                                    <option value="9000">Quận / Huyện</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-12 col-xs-12">
+                                <div class="title-left">
+                                    <h3>Phương thức vận chuyển</h3>
+                                </div>
+                                <div class="shipment form-control">
+                                    <div class="shipment__input">
+                                        <input type="radio" class="shipment__radio" id="shipment" checked>
+                                        <label for="shipment" class="shipment__title">Giao hàng tận nơi</label>
+                                    </div>
+                                    <span class="shipment__fee">35,000₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3 bb">
+                            <div class="col-lg-12 col-xs-12">
+                                <div class="title-left">
+                                    <h3>Phương thức thanh toán</h3>
+                                </div>
+                                <div class="pay-product form-control">
+                                    <label class="pay-border shipment__input">
+                                        <div class="pay-wrapper">
+                                            <input type="radio" class="shipment__radio" id="pay" name="payment" checked>
+                                            <img src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg" alt="">
+                                            <label for="pay" class="shipment__title">Thanh toán khi giao hàng (COD)</label>
+                                        </div>
+                                    </label>
+                                    <label class="pay-border shipment__input" id="payment__live">
+                                        <div class="pay-wrapper pay-content">
+                                            <span>
+                                                Sau khi đặt thành công khách hàng xác nhận đơn bằng tin nhắn < MÃ ĐƠN HÀNG > gửi 0909738828 để chúng tôi kiểm tra chuẩn bị đơn hàng và giao cho nhà vận chuyển
+                                                Da Đen chỉ nhận giao đơn từ 100k ̣̣̣̣(chưa tính phí ship)
+                                                VD: #101899 Gửi 0909738828
+                                                Đơn hàng HCM: 1->2 ngày giao hàng xác nhận đơn trước 15h00 hàng ngày
+                                                Đơn hàng các tỉnh: 3->5 ngày giao hàng xác nhận đơn trước 15h00 hàng ngày
+                                                Xin chân thành cảm ơn đã tin tưởng và ủng hộ www.hoacudaden.com suốt thời gian qua.
+                                            </span>
+                                        </div>
+                                    </label>
+                                    <label class="pay-border shipment__input">
+                                        <div class="pay-wrapper">
+                                            <input type="radio" class="shipment__radio" id="bank" name="payment">
+                                            <img src="https://hstatic.net/0/0/global/design/seller/image/payment/other.svg" alt="">
+                                            <label for="bank" class="shipment__title">Chuyển khoản qua ngân hàng</label>
+                                        </div>
+                                    </label>
+                                    <label class="pay-border shipment__input pay-hidden" id="payment__online">
+                                        <div class="pay-wrapper pay-content pay-content__center">
+                                                * Ngân hàng TPCP Ngoại thương Việt Nam<br>
+                                                Vietcombank - Chi nhánh Ngọc Khánh 0222002333663<br>
+                                                Chủ tài khoản: Triệu Lệ Dĩnh<br>
+                                                * Sau khi đặt thành công đơn hàng khách hàng xác nhận giao đơn bằng tin nhắn<br> 
+                                                < MÃ ĐƠN HÀNG > < SỐ TIÊN CHUYỂN KHOẢN > gửi 0909738828<br>
+                                                Vd: #101899 500.000đ Gửi 0912345678
+                                                Xin chân thành cảm ơn quý khách.<br>
+                                                * Chuyển khoản qua ngân hàng<br>
+                                                Thông tin nội dung chuyển khoản :
+                                                < Tên > < SĐT > < Mã Đơn Hàng >
+                                            </span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-5 col-lg-5 col-sm-12 mb-3">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="odr-box">
+                            <div class="title-left">
+                                <h3>Thông tin giỏ hàng</h3>
+                            </div>
+                            <div class="rounded p-2 bg-light">
+                                   <% customerCart.forEach(element => { %>
+                                        <div class="media mb-2 border-bottom information-product">
+                                        <div class="product__image">
+                                            <img src="<%= element.image %>" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="/products/<%= element.productCode %>"><%= element.productname %></a>
+                                            <div class="small text-muted">
+                                            <!-- <span>202 - Peach Pink</span>
+                                            <span class="mx-2">|</span> -->
+                                            <span class="mx-2">Giá: <%= numberWithCommas(element.price) %>₫</span>
+                                            <span class="mx-2">|</span> Số lượng: <%= element.quantity %> <span class="mx-2">|</span> Thành tiền: <%= numberWithCommas(parseInt(element.quantity)*parseInt(element.price)) %>₫
+                                        </div>
+                                    </div>
+                                </div>
+                                 <%  }); %> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="order-box">
+                            <hr class="my-1">
+                            <div class="d-flex payment__price">
+                                <h4>Tạm tính</h4>
+                                <div class="ml-auto font-weight-bold"><%= numberWithCommas(totalprice) %>₫ </div>
+                            </div>
+                            <div class="d-flex payment__price">
+                                <h4>Giảm giá</h4>
+                                <div class="ml-auto font-weight-bold"> 0₫ </div>
+                            </div>
+                            <div class="d-flex payment__price">
+                                <h4>Phí vận chuyển</h4>
+                                <div class="ml-auto font-weight-bold">35,000₫ </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex gr-total payment__price">
+                                <h5>Thành tiền</h5>
+                                <div class="ml-auto h5"><input style="text-align:right" disabled type="text" class="form-control" id="totalprice" name="totalprice" placeholder="" value="<%= numberWithCommas(totalprice+parseInt(35000)) %>₫"></div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="col-lg-12 d-flex shopping-box col-xs-12"> 
+                            <button type="submit" id="order" class="btn-pay btn btn--primary">ĐẶT HÀNG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</div>
+<script>
+    var provinces = [
+    {
+        name  : "An Giang",
+        cities: ["Huyện An Phú", "Huyện Châu Phú", "Huyện Châu Thành", "Huyện Chợ Mới", "Huyện Phú Tân", "Huyện Tân Châu", "Huyện Thoại Sơn", "Huyện Tịnh Biên", "Huyện Tri Tôn"]
+    },
+    {
+        name  : "Bà Rịa-Vũng Tàu",
+        cities: ["Thành phố Vũng Tàu", "Thị xã Bà Rịa", "Huyện Châu Đức", "Huyện Đất Đỏ", "Huyện Long Điền", "Huyện Tân Thành", "Huyện Xuyên Mộc", "Huyện Côn Đảo"]
+    },
+    {
+        name  : "Bạc Liêu",
+        cities: ["Huyện Phước Long", "Huyện Hồng Dân", "Huyện Vĩnh Lợi", "Huyện Giá Rai", "Huyện Đông Hải", "Huyện Hòa Bình"]
+    },
+    {
+        name  : "Bắc Cạn",
+        cities: ["Thị xã Bắc Kạn", "Huyện Ba Bể", "Huyện Bạch Thông", "Huyện Chợ Đồn", "Huyện Chợ Mới", "Huyện Na Rì", "Huyện Ngân Sơn", "Huyện Pác Nặm"]
+    },
+    {
+        name  : "Bắc Giang",
+        cities: ["Thành phố Bắc Giang", "Huyện Yên Thế", "Huyện Tân Yên", "Huyện Lục Ngạn", "Huyện Hiệp Hoà", "Huyện Lạng Giang", "Huyện Sơn Động", "Huyện Lục Nam", "Huyện Việt Yên", "Huyện Yên Dũng"]
+    },
+    {
+        name  : "Bắc Ninh",
+        cities: ["Thành phố Bắc Ninh", "Huyện Gia Bình", "Huyện Lương Tài", "Huyện Quế Võ", "Huyện Thuận Thành", "Huyện Tiên Du", "Huyện Từ Sơn", "Huyện Yên Phong"]
+    },
+    {
+        name  : "Bến Tre",
+        cities: ["Thị xã Bến Tre", "Huyện Ba Tri", "Huyện Bình Đại", "Huyện Châu Thành", "Huyện Chợ Lách", "Huyện Giồng Trôm", "Huyện Mỏ Cày", "Huyện Thạnh Phú"]
+    },
+    {
+        name  : "Bình Dương",
+        cities: ["Thị xã Thủ Dầu Một", "Huyện Bến Cát", "Huyện Dầu Tiếng", "Huyện Tân Uyên", "Huyện Phú Giáo", "Huyện Thuận An", "Huyện Dĩ An"]
+    },
+    {
+        name  : "Bình Định",
+        cities: ["Thành phố Qui Nhơn", "Huyện An Lão", "Huyện An Nhơn", "Huyện Hoài Ân", "Huyện Hoài Nhơn", "Huyện Phù Cát", "Huyện Phù Mỹ", "Huyện Tuy Phước", "Huyện Tây Sơn", "Huyện Vân Canh", "Huyện Vĩnh Thạnh"]
+    },
+    {
+        name  : "Bình Phước",
+        cities: ["Thị xã Đồng Xoài", "Huyện Bình Long", "Huyện Bù Đăng", "Huyện Bù Đốp", "Huyện Chơn Thành", "Huyện Đồng Phú", "Huyện Lộc Ninh", "Huyện Phước Long"]
+    },
+    {
+        name  : "Bình Thuận",
+        cities: ["Thành phố Phan Thiết", "Thị xã La Gi", "Huyện Tuy Phong", "Huyện Bắc Bình", "Huyện Hàm Thuận Bắc", "Huyện Hàm Thuận Nam", "Huyện Tánh Linh", "Huyện Hàm Tân", "Huyện Đức Linh", "Huyện đảo Phú Quý"]
+    },
+    {
+        name  : "Cà Mau",
+        cities: ["Thành phố Cà Mau", "Huyện Đầm Dơi", "Huyện Ngọc Hiển", "Huyện Cái Nước", "Huyện Trần Văn Thời", "Huyện U Minh", "Huyện Thới Bình", "Huyện Năm Căn", "Huyện Phú Tân"]
+    },
+    {
+        name  : "Cao Bằng",
+        cities: ["Thị xã Cao Bằng", "Huyện Bảo Lạc", "Huyện Bảo Lâm", "Huyện Hạ Lang", "Huyện Hà Quảng", "Huyện Hòa An", "Huyện Nguyên Bình", "Huyện Phục Hòa", "Huyện Quảng Uyên", "Huyện Thạch An", "Huyện Thông Nông", "Huyện Trà Lĩnh", "Huyện Trùng Khánh"]
+    },
+    {
+        name  : "Cần Thơ",
+        cities: ["Quận Ninh Kiều", "Quận Bình Thủy", "Quận Cái Răng", "Quận Ô Môn", "Huyện Phong Điền", "Huyện Cờ Đỏ", "Huyện Thốt Nốt", "Huyện Vĩnh Thạnh"]
+    },
+    {
+        name  : "Đà Nẵng",
+        cities: ["Quận Hải Châu", "Quận Thanh Khê", "Quận Sơn Trà", "Quận Ngũ Hành Sơn", "Quận Liên Chiểu", "Quận Cẩm Lệ", "Huyện Hòa Vang", "Huyện đảo Hoàng Sa"]
+    },
+    {
+        name  : "Đắk Lắk",
+        cities: ["Thành phố Buôn Ma Thuột", "Huyện Krông Buk", "Huyện Krông Pak", "Huyện Lắk", "Huyện Ea Súp", "Huyện M'Drăk", "Huyện Krông Ana", "Huyện Krông Bông", "Huyện Ea H'leo", "Huyện Cư M'gar", "Huyện Krông Năng", "Huyện Buôn Đôn", "Huyện Ea Kar", "Huyện Cư Kuin"]
+    },
+    {
+        name  : "Đắk Nông",
+        cities: ["Thị xã Gia Nghĩa", "Huyện Cư Jút", "Huyện Đăk Glong", "Huyện Đăk Mil", "Huyện Đăk R'Lấp", "Huyện Đăk Song", "Huyện Krông Nô", "Huyện Tuy Đức"]
+    },
+    {
+        name  : "Điện Biên",
+        cities: ["Thành phố Điện Biên Phủ", "Thị xã Mường Lay", "Huyện Điện Biên", "Huyện Điện Biên Đông", "Huyện Mường Ảng", "Huyện Mường Chà", "Huyện Mường Nhé", "Huyện Tủa Chùa", "Huyện Tuần Giáo"]
+    },
+    {
+        name  : "Đồng Nai",
+        cities: ["Thành phố Biên Hoà", "Thị xã Long Khánh", "Huyện Định Quán", "Huyện Long Thành", "Huyện Nhơn Trạch", "Huyện Tân Phú", "Huyện Thống Nhất", "Huyện Vĩnh Cửu", "Huyện Xuân Lộc", "Huyện Cẩm Mỹ", "Huyện Trảng Bom"]
+    },
+    {
+        name  : "Đồng Tháp",
+        cities: ["Thành phố Cao Lãnh", "Thị xã Sa Đéc", "Huyện Cao Lãnh", "Huyện Châu Thành", "Huyện Hồng Ngự", "Huyện Lai Vung", "Huyện Lấp Vò", "Huyện Tam Nông", "Huyện Tân Hồng", "Huyện Thanh Bình", "Huyện Tháp Mười"]
+    },
+    {
+        name  : "Gia Lai",
+        cities: ["Thành phố Pleiku", "Thị xã An Khê", "Thị xã Ayun Pa", "Huyện Chư Păh", "Huyện Chư Prông", "Huyện Chư Sê", "Huyện Đắk Đoa", "Huyện Đắk Pơ", "Huyện Đức Cơ", "Huyện Ia Grai", "Huyện Ia Pa", "Huyện K'Bang", "Huyện Kông Chro", "Huyện Krông Pa", "Huyện Mang Yang", "Huyện Phú Thiện"]
+    },
+    {
+        name  : "Hà Giang",
+        cities: ["Thị xã Hà Giang", "Huyện Bắc Mê", "Huyện Bắc Quang", "Huyện Đồng Văn", "Huyện Hoàng Su Phì", "Huyện Mèo Vạc", "Huyện Quản Bạ", "Huyện Quang Bình", "Huyện Vị Xuyên", "Huyện Xín Mần", "Huyện Yên Minh"]
+    },
+    {
+        name  : "Hà Nam",
+        cities: ["Thành phố Phủ Lý", "Huyện Bình Lục", "Huyện Duy Tiên", "Huyện Kim Bảng", "Huyện Lý Nhân", "Huyện Thanh Liêm"]
+    },
+    {
+        name  : "Hà Nội",
+        cities: ["Quận Ba Đình", "Quận Cầu Giấy", "Quận Đống Đa", "Quận Hai Bà Trưng", "Quận Hoàn Kiếm", "Quận Hoàng Mai", "Quận Long Biên", "Quận Tây Hồ", "Quận Thanh Xuân", "Huyện Ba Vì", "Huyện Chương Mỹ", "Huyện Đan Phượng", "Huyện Đông Anh", "Huyện Gia Lâm", "Huyện Hoài Đức", "Huyện Mê Linh", "Huyện Mỹ Đức", "Huyện Phú Xuyên", "Huyện Phúc Thọ", "Huyện Quốc Oai", "Huyện Sóc Sơn", "Huyện Thạch Thất", "Huyện Thanh Oai", "Huyện Thanh Trì", "Huyện Thường Tín", "Huyện Từ Liêm", "Huyện Ứng Hòa"]
+    },
+    {
+        name  : "Hà Tây",
+        cities: ["Thành phố Hà Đông", "Thành phố Sơn Tây", "Huyện Ba Vì", "Huyện Chương Mỹ", "Huyện Đan Phượng", "Huyện Hoài Đức", "Huyện Mỹ Đức", "Huyện Phú Xuyên", "Huyện Phúc Thọ", "Huyện Quốc Oai", "Huyện Thạch Thất", "Huyện Thanh Oai", "Huyện Thường Tín", "Huyện Ứng Hòa"]
+    },
+    {
+        name  : "Hà Tĩnh",
+        cities: ["Thành phố Hà Tĩnh", "Thị xã Hồng Lĩnh", "Huyện Cẩm Xuyên", "Huyện Can Lộc", "Huyện Đức Thọ", "Huyện Hương Khê", "Huyện Hương Sơn", "Huyện Kỳ Anh", "Huyện Nghi Xuân", "Huyện Thạch Hà", "Huyện Vũ Quang", "Huyện Lộc Hà"]
+    },
+    {
+        name  : "Hải Dương",
+        cities: ["Thành phố Hải Dương", "Huyện Bình Giang", "Huyện Cẩm Giàng", "Huyện Chí Linh", "Huyện Gia Lộc", "Huyện Kim Thành", "Huyện Kinh Môn", "Huyện Nam Sách", "Huyện Ninh Giang", "Huyện Thanh Hà", "Huyện Thanh Miện", "Huyện Tứ Kỳ"]
+    },
+    {
+        name  : "Hải Phòng",
+        cities: ["Quận Dương Kinh", "Quận Đồ Sơn", "Quận Hải An", "Quận Hồng Bàng", "Quận Kiến An", "Quận Lê Chân", "Quận Ngô Quyền", "Huyện An Dương", "Huyện An Lão", "Huyện đảo Bạch Long Vĩ", "Huyện đảo Cát Hải", "Huyện Kiến Thụy", "Huyện Thủy Nguyên", "Huyện Tiên Lãng", "Huyện Vĩnh Bảo"]
+    },
+    {
+        name  : "Hậu Giang",
+        cities: ["Thị xã Vị Thanh", "Thị xã Ngã Bảy", "Huyện Châu Thành", "Huyện Châu Thành A", "Huyện Long Mỹ", "Huyện Phụng Hiệp", "Huyện Vị Thủy"]
+    },
+    {
+        name  : "Hòa Bình",
+        cities: ["Thành phố Hòa Bình", "Huyện Lương Sơn", "Huyện Cao Phong", "Huyện Đà Bắc", "Huyện Kim Bôi", "Huyện Kỳ Sơn", "Huyện Lạc Sơn", "Huyện Lạc Thủy", "Huyện Mai Châu", "Huyện Tân Lạc", "Huyện Yên Thủy"]
+    },
+    {
+        name  : "TP Hồ Chí Minh",
+        cities: ["Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Quận Bình Chánh", "Quận Bình Tân", "Quận Bình Thạnh", "Quận Gò Vấp", "Quận Hóc Môn", "Quận Nhà Bè", "Quận Phú Nhuận", "Quận Tân Bình", "Quận Tân Phú", "Quận Thủ Đức"]
+    },
+    {
+        name  : "Hưng Yên",
+        cities: ["Thị xã Hưng Yên", "Huyện Ân Thi", "Huyện Khoái Châu", "Huyện Kim Động", "Huyện Mỹ Hào", "Huyện Phù Cừ", "Huyện Tiên Lữ", "Huyện Văn Giang", "Huyện Văn Lâm", "Huyện Yên Mỹ"]
+    },
+    {
+        name  : "Khánh Hòa",
+        cities: ["Thành phố Nha Trang", "Thị xã Cam Ranh", "Huyện Cam Lâm", "Huyện Vạn Ninh", "Huyện Ninh Hòa", "Huyện Diên Khánh", "Huyện Khánh Vĩnh", "Huyện Khánh Sơn", "Huyện đảo Trường Sa"]
+    },
+    {
+        name  : "Kiên Giang",
+        cities: ["Thành phố Rạch Giá", "Thị xã Hà Tiên", "Huyện An Biên", "Huyện An Minh", "Huyện Châu Thành", "Huyện Giồng Riềng", "Huyện Gò Quao", "Huyện Hòn Đất", "Huyện Kiên Hải", "Huyện Kiên Lương", "Huyện Phú Quốc", "Huyện Tân Hiệp", "Huyện Vĩnh Thuận", "Huyện U Minh Thượng"]
+    },
+    {
+        name  : "Kon Tum",
+        cities: ["Thị xã Kon Tum", "Huyện Đắk Glei", "Huyện Đắk Hà", "Huyện Đắk Tô", "Huyện Kon Plông", "Huyện Kon Rẫy", "Huyện Ngọc Hồi", "Huyện Sa Thầy", "Huyện Tu Mơ Rông"]
+    },
+    {
+        name  : "Lai Châu",
+        cities: ["Thị xã Lai Châu", "Huyện Mường Tè", "Huyện Phong Thổ", "Huyện Sìn Hồ", "Huyện Tam Đường", "Huyện Than Uyên"]
+    },
+    {
+        name  : "Lạng Sơn",
+        cities: ["Thành phố Lạng Sơn", "Huyện Tràng Định", "Huyện Văn Lãng", "Huyện Văn Quan", "Huyện Bình Gia", "Huyện Bắc Sơn", "Huyện Hữu Lũng", "Huyện Chi Lăng", "Huyện Cao Lộc", "Huyện Lộc Bình", "Huyện Đình Lập"]
+    },
+    {
+        name  : "Lào Cai",
+        cities: ["Thành phố Lào Cai", "Huyện Bảo Thắng", "Huyện Bảo Yên", "Huyện Bát Xát", "Huyện Bắc Hà", "Huyện Mường Khương", "Huyện Sa Pa", "Huyện Si Ma Cai", "Huyện Văn Bàn"]
+    },
+    {
+        name  : "Lâm Đồng",
+        cities: ["Thành phố Đà Lạt", "Thị xã Bảo Lộc", "Huyện Lạc Dương", "Huyện Đơn Dương", "Huyện Đức Trọng", "Huyện Lâm Hà", "Huyện Đam Rông", "Huyện Bảo Lâm", "Huyện Di Linh", "Huyện Đạ Huoai", "Huyện Đạ Tẻh", "Huyện Cát Tiên"]
+    },
+    {
+        name  : "Long An",
+        cities: ["Thị xã Tân An", "Huyện Bến Lức", "Huyện Cần Đước", "Huyện Cần Giuộc", "Huyện Châu Thành", "Huyện Đức Hòa", "Huyện Đức Huệ", "Huyện Mộc Hóa", "Huyện Tân Hưng", "Huyện Tân Thạnh", "Huyện Tân Trụ", "Huyện Thạnh Hóa", "Huyện Thủ Thừa", "Huyện Vĩnh Hưng"]
+    },
+    {
+        name  : "Nam Định",
+        cities: ["Thành phố Nam Định", "Huyện Giao Thủy", "Huyện Hải Hậu", "Huyện Mỹ Lộc", "Huyện Nam Trực", "Huyện Nghĩa Hưng", "Huyện Trực Ninh", "Huyện Vụ Bản", "Huyện Xuân Trường", "Huyện Ý Yên"]
+    },
+    {
+        name  : "Nghệ An",
+        cities: ["Thành phố Vinh", "Thị xã Cửa Lò", "Thị xã Thái Hòa", "Huyện Anh Sơn", "Huyện Con Cuông", "Huyện Diễn Châu", "Huyện Đô Lương", "Huyện Hưng Nguyên", "Huyện Quỳ Châu", "Huyện Kỳ Sơn", "Huyện Nam Đàn", "Huyện Nghi Lộc", "Huyện Nghĩa Đàn", "Huyện Quế Phong", "Huyện Quỳ Hợp", "Huyện Quỳnh Lưu", "Huyện Tân Kỳ", "Huyện Thanh Chương", "Huyện Tương Dương", "Huyện Yên Thành"]
+    },
+    {
+        name  : "Ninh Bình",
+        cities: ["Thành phố Ninh Bình", "Thị xã Tam Điệp", "Huyện Gia Viễn", "Huyện Hoa Lư", "Huyện Kim Sơn", "Huyện Nho Quan", "Huyện Yên Khánh", "Huyện Yên Mô"]
+    },
+    {
+        name  : "Ninh Thuận",
+        cities: ["Thành phố Phan Rang-Tháp Chàm", "Huyện Bác Ái", "Ninh Hải", "Ninh Phước", "Ninh Sơn", "Thuận Bắc"]
+    },
+    {
+        name  : "Phú Thọ",
+        cities: ["Thành phố Việt Trì", "Thị xã Phú Thọ", "Huyện Cẩm Khê", "Huyện Đoan Hùng", "Huyện Hạ Hòa", "Huyện Lâm Thao", "Huyện Phù Ninh", "Huyện Tam Nông", "Huyện Tân Sơn", "Huyện Thanh Ba", "Huyện Thanh Sơn", "Huyện Thanh Thủy", "Huyện Yên Lập"]
+    },
+    {
+        name  : "Phú Yên",
+        cities: ["Thành phố Tuy Hòa", "Huyện Đông Hòa", "Huyện Đồng Xuân", "Huyện Phú Hòa", "Huyện Sơn Hòa", "Huyện Sông Cầu", "Huyện Sông Hinh", "Huyện Tây Hòa", "Huyện Tuy An"]
+    },
+    {
+        name  : "Quảng Bình",
+        cities: ["Thành phố Đồng Hới", "Huyện Bố Trạch", "Huyện Lệ Thủy", "Huyện Minh Hóa", "Huyện Quảng Trạch", "Huyện Quảng Ninh", "Huyện Tuyên Hóa"]
+    },
+    {
+        name  : "Quảng Nam",
+        cities: ["Thành phố Tam Kỳ", "Thành phố Hội An", "Huyện Duy Xuyên", "Huyện Đại Lộc", "Huyện Điện Bàn", "Huyện Đông Giang", "Huyện Nam Giang", "Huyện Tây Giang", "Huyện Quế Sơn", "Huyện Hiệp Đức", "Huyện Núi Thành", "Huyện Nam Trà My", "Huyện Bắc Trà My", "Huyện Phú Ninh", "Huyện Phước Sơn", "Huyện Thăng Bình", "Huyện Tiên Phước", "Huyện Nông Sơn"]
+    },
+    {
+        name  : "Quảng Ngãi",
+        cities: ["Thành phố Quảng Ngãi", "Huyện Ba Tơ", "Huyện Bình Sơn", "Huyện Đức Phổ", "Huyện Minh Long", "Huyện Mộ Đức", "Huyện Nghĩa Hành", "Huyện Sơn Hà", "Huyện Sơn Tây", "Huyện Sơn Tịnh", "Huyện Tây Trà", "Huyện Trà Bồng", "Huyện Tư Nghĩa", "Huyện đảo Lý Sơn"]
+    },
+    {
+        name  : "Quảng Ninh",
+        cities: ["Thành phố Hạ Long", "Thị xã Cẩm Phả", "Thị xã Móng Cái", "Thị xã Uông Bí", "Huyện Ba Chẽ", "Huyện Bình Liêu", "Huyện Cô Tô", "Huyện Đầm Hà", "Huyện Đông Triều", "Huyện Hải Hà", "Huyện Hoành Bồ", "Huyện Tiên Yên", "Huyện Vân Đồn", "Huyện Yên Hưng"]
+    },
+    {
+        name  : "Quảng Trị",
+        cities: ["Thị xã Đông Hà", "Thị xã Quảng Trị", "Huyện Cam Lộ", "Huyện Cồn Cỏ", "Huyện Đa Krông", "Huyện Gio Linh", "Huyện Hải Lăng", "Huyện Hướng Hóa", "Huyện Triệu Phong", "Huyện Vĩnh Linh"]
+    },
+    {
+        name  : "Sóc Trăng",
+        cities: ["Thành phố Sóc Trăng", "Huyện Long Phú", "Cù Lao Dung", "Mỹ Tú", "Thạnh Trị", "Vĩnh Châu", "Ngã Năm", "Kế Sách", "Mỹ Xuyên"]
+    },
+    {
+        name  : "Sơn La",
+        cities: ["Thị xã Sơn La", "Huyện Quỳnh Nhai", "Huyện Mường La", "Huyện Thuận Châu", "Huyện Phù Yên", "Huyện Bắc Yên", "Huyện Mai Sơn", "Huyện Sông Mã", "Huyện Yên Châu", "Huyện Mộc Châu", "Huyện Sốp Cộp"]
+    },
+    {
+        name  : "Tây Ninh",
+        cities: ["Thị xã Tây Ninh", "Huyện Tân Biên", "Huyện Tân Châu", "Huyện Dương Minh Châu", "Huyện Châu Thành", "Huyện Hòa Thành", "Huyện Bến Cầu", "Huyện Gò Dầu", "Huyện Trảng Bàng"]
+    },
+    {
+        name  : "Thái Bình",
+        cities: ["Thành phố Thái Bình", "Huyện Đông Hưng", "Huyện Hưng Hà", "Huyện Kiến Xương", "Huyện Quỳnh Phụ", "Huyện Thái Thụy", "Huyện Tiền Hải", "Huyện Vũ Thư"]
+    },
+    {
+        name  : "Thái Nguyên",
+        cities: ["Thành phố Thái Nguyên", "Thị xã Sông Công", "Huyện Phổ Yên", "Huyện Phú Bình", "Huyện Đồng Hỷ", "Huyện Võ Nhai", "Huyện Định Hóa", "Huyện Đại Từ", "Huyện Phú Lương"]
+    },
+    {
+        name  : "Thanh Hoá",
+        cities: ["Thành phố Thanh Hóa", "Thị xã Bỉm Sơn", "Thị xã Sầm Sơn", "Huyện Bá Thước", "Huyện Cẩm Thủy", "Huyện Đông Sơn", "Huyện Hà Trung", "Huyện Hậu Lộc", "Huyện Hoằng Hóa", "Huyện Lang Chánh", "Huyện Mường Lát", "Huyện Nga Sơn", "Huyện Ngọc Lặc", "Huyện Như Thanh", "Huyện Như Xuân", "Huyện Nông Cống", "Huyện Quan Hóa", "Huyện Quan Sơn", "Huyện Quảng Xương", "Huyện Thạch Thành", "Huyện Thiệu Hóa", "Huyện Thọ Xuân", "Huyện Thường Xuân", "Huyện Tĩnh Gia", "Huyện Triệu Sơn", "Huyện Vĩnh Lộc", "Huyện Yên Định"]
+    },
+    {
+        name  : "Thừa Thiên-Huế",
+        cities: ["Thành phố Huế", "Huyện A Lưới", "Huyện Hương Thủy", "Huyện Hương Trà", "Huyện Nam Đông", "Huyện Phong Điền", "Huyện Phú Lộc", "Huyện Phú Vang", "Huyện Quảng Điền"]
+    },
+    {
+        name  : "Tiền Giang",
+        cities: ["Thành phố Mỹ Tho", "Thị xã Gò Công", "Huyện Gò Công Đông", "Huyện Gò Công Tây", "Huyện Chợ Gạo", "Huyện Châu Thành", "Huyện Tân Phước", "Huyện Cai Lậy", "Huyện Cái Bè", "Huyện Tân Phú Đông"]
+    },
+    {
+        name  : "Trà Vinh",
+        cities: ["Thị xã Trà Vinh", "Huyện Càng Long", "Huyện Châu Thành", "Huyện Cầu Kè", "Huyện Tiểu Cần", "Huyện Cầu Ngang", "Huyện Trà Cú", "Huyện Duyên Hải"]
+    },
+    {
+        name  : "Tuyên Quang",
+        cities: ["Thị xã Tuyên Quang", "Huyện Chiêm Hoá", "Huyện Hàm Yên", "Huyện Na Hang", "Huyện Sơn Dương", "Huyện Yên Sơn"]
+    },
+    {
+        name  : "Vĩnh Long",
+        cities: ["Thị xã Vĩnh Long", "Huyện Bình Minh", "Huyện Bình Tân", "Huyện Long Hồ", "Huyện Mang Thít", "Huyện Tam Bình", "Huyện Trà Ôn", "Huyện Vũng Liêm"]
+    },
+    {
+        name  : "Vĩnh Phúc",
+        cities: ["Thành phố Vĩnh Yên", "Thị xã Phúc Yên", "Huyện Bình Xuyên", "Huyện Lập Thạch", "Huyện Tam Dương", "Huyện Tam Đảo", "Huyện Vĩnh Tường", "Huyện Yên Lạc"]
+    },
+    {
+        name  : "Yên Bái",
+        cities: ["Thành phố Yên Bái", "Thị xã Nghĩa Lộ", "Huyện Lục Yên", "Huyện Mù Cang Chải", "Huyện Trấn Yên", "Huyện Trạm Tấu", "Huyện Văn Chấn", "Huyện Văn Yên", "Huyện Yên Bình"]
+    }
+];
+    function initDropDownProvince(){
+        var select1, m, option1, select2 ,option2, i2, j, city, indexProvince ;
+
+        select1=document.getElementById('provinces');
+        for(m=0;m<provinces.length;m++){
+            option1=document.createElement('option');
+            option1.value=m;
+            option1.innerHTML=provinces[m].name;
+            select1.add(option1);
+        }
+
+        city=document.getElementById('district');
+        indexProvince=document.getElementById('provinces').value;
+        if(indexProvince!=9000)
+        {
+            for(var x = city.options.length-1; x>=0; x--)
+            {
+                city.remove(x);
+            }
+            for(n=0; n<provinces.length; n++){
+                if(n==indexProvince)
+                {
+                    select2=document.getElementById('district');
+                    for(j=0;j<provinces[n].cities.length;j++)
+                    {
+                        option2=document.createElement('option');
+                        option2.value=j;
+                        option2.innerHTML=provinces[n].cities[j];
+                        select2.add(option2);
+                    }
+                }
+            }
+        }
+    }
+    var provinceName=document.querySelector('.provinces__name');
+    provinceName.addEventListener('click', initDropDownProvince);
+
+    var pay_live=document.getElementById('payment__live');
+    var pay_online=document.getElementById('payment__online');
+    var pay=document.getElementById('pay');
+    var bank=document.getElementById('bank');
+
+    function Live(){
+        pay_live.classList.remove('pay-hidden');
+        pay_online.classList.add('pay-hidden');
+    }
+
+    function Online(){
+        pay_online.classList.remove('pay-hidden');
+        pay_live.classList.add('pay-hidden');
+    }
+
+    pay.addEventListener('click', Live);
+    bank.addEventListener('click', Online);
+    
+        $('#order').click(function(){
+        var username = $('#shipName').val();
+        var email = $('#email').val();
+        var phone = $('#phone').val();
+        var address = $('#address').val();
+        var indexprovince = $('#provinces').val();
+        var province= provinces[indexprovince];
+
+        var indexdistrict = $('#district').val();
+        var district = province.cities[indexdistrict];
+
+        var totalprice= $('#totalprice').val().replaceAll(",","").replace("₫","");
+        var user = {
+            name:username,
+            phone:phone,
+            email:email,
+            province:province.name,
+            district: district
+        }
+        var typepay = $("#pay").is(":checked") ? 0 : 1;
+        
+
+        var data = {
+            totalprice: totalprice,
+            note: "",
+            user: user,
+            addressShip: address,
+            typePay: typepay,
+            status: 1 // hủy bỏ - đã tiếp nhận - đang chuẩn bị hàng - đang chuyển hàng - hoàn thành 
+        }
+        var json = JSON.stringify(data);
+        console.log(json);
+        $.ajax({
+            url: '/checkout/add',
+            data: json,
+            type: "post",
+            method: 'POST',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                window.location.replace("/");
+            },
+            error: function (data) {
+                console.log(data)
+                $.notify(data, {className: "error"})
+            }
+        }
+        )
+
+    })
+</script>

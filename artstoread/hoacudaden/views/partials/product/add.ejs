@@ -1,0 +1,393 @@
+<link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet">
+<link href="/css/list_image_product.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.2.6/quill.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<script src="/js/notify.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<style>
+        .pull-left{
+        text-transform: capitalize !important;
+    }
+</style>
+<% if (typeof message != 'undefined') { 
+    if (message == "Failed")
+    {  %>
+        <div class="alert alert-dismissable bg-red">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <%= message %>
+        </div>
+    <% } else 
+    { %>
+        <div class="alert alert-dismissable bg-green">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <%= message %>
+        </div>
+    <%}}; %>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>ADD NEW </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                    <form id="form_advanced_validation"></form>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="productname" id="productname">
+                            <label class="form-label">Tên sản phẩm</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="productcode"  id="productcode">
+                            <label class="form-label">Mã sản phẩm</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="quantity" id="quantity" >
+                            <label class="form-label">Số lượng</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" value="" name="price" id="price">
+                            <label class="form-label">Đơn giá</label>
+                        </div>
+                        <div class="help-info"></div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="form-group form-float">
+                            <div class="col-sm-12 col-lg-6 col-md-6">
+                                <div class="form-line">
+                                    <input type="number"  class="form-control" value="" name="discount" id="discount">
+                                    <label class="form-label">Khuyến mãi(%)</label>
+                                </div>
+                            </div>
+                           <div class="col-sm-12 col-lg-6 col-md-6">
+                                <label>Giá sau khi giảm:</label>
+                                <span class="form-label" id="discountPrice"></span>
+                           </div>
+                        </div>
+                    </div>
+                    <% 
+                        // '','Hưng Thịnh','Casio','Iphone','HOLBEIN','Da Đen','Da Đỏ'
+                        const listBrand=[
+                            { name:"Phúc Long",alias:"phuc-long"},
+                            { name:"Casio",alias:"Casio"},
+                            { name:"Iphone",alias:"Iphone"},
+                            { name:"HOLBEIN",alias:"HOLBEIN"},
+                            { name:"Da Đen",alias:"da den"},
+                            { name:"Da Đỏ",alias:"da-do"},
+                            { name:"KLONG", alias:"KLONG"},
+                            { name:"miya", alias:"miya"},
+                            { name:"marvy", alias:"marvy"},
+                            { name:"Sakura", alias:"Sakura"},
+                            { name: "STABILO", alias:"STABILO"},
+                            { name: "SONNET", alias:"SONNET"},
+                            { name:"Khác",alias:"Khác"}
+                            ]
+                        %>
+                    <div class="form-group form-float">
+                        <div class="form-line" style="text-transform: capitalize;">
+                            <label for="selectBrand">Thương Hiệu</label>
+                            <select id="selectBrand" style="text-transform: capitalize;" name="grouptype" class="selectBrand">
+                               <% listBrand.forEach(optionBrand =>{%>
+                                        <option style="text-transform: capitalize;" value=<%= optionBrand.alias %>><%=optionBrand.name%></option>
+                               <%})%>
+                            </select>
+                    </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line" style="text-transform: capitalize;">
+                            <label for="selectgroup">Thể loại</label>
+                            <select id="myselect" style="text-transform: capitalize;" name="grouptype" class="myselect">
+                               <% categories.forEach(optiongroup =>{ if(optiongroup.isactive==true) {%>
+                                    <optgroup style="text-transform: capitalize;"  label=<%=optiongroup.group%>>
+                                    <% optiongroup.type.forEach(option =>{ let value = optiongroup.group +'|'+ option ; %>
+                                        <option style="text-transform: capitalize;" value="<%= value %>"><%=option%></option>
+                                    <%})%>
+                                    </optgroup>
+                               <%}})%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="form-group form-float">
+                            <div class="col-sm-4">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="" name="width" id="chieudai">
+                                    <label class="form-label">Chiều dài</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="" name="height" id="chieurong">
+                                    <label class="form-label">Chiều cao</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" value="" name="weight" id="khoiluong">
+                                    <label class="form-label">Khối lượng</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="row clearfix">
+                    <div class="form-group form-float">
+                        <div class="col-lg-1">
+                            <label for="option">
+                                Tùy chọn
+                            </label>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-sm-12" id="option-div">
+                            <input class="input-option" type="text" name="option" value="" placeholder="Lựa chọn"/>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-12">
+                                <button id="btnAddChoice" class="btn">
+                                    Thêm lựa chọn
+                                </button>
+                                <button id="btnRemoveChoice" class="btn btn-danger">
+                                    Bớt lựa chọn
+                                </button>
+                            </div>
+                    </div>
+                   </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label class="">Màu sắc</label>
+                            <input type="checkbox" id="md_checkbox_21" name="checklist[]" value="red" class="filled-in chk-col-red myCheckBox"/>
+                            <label for="md_checkbox_21">RED</label>
+                            <input type="checkbox" id="md_checkbox_22" name="checklist[]" value="pink" class="filled-in chk-col-pink myCheckBox"/>
+                            <label for="md_checkbox_22">PINK</label>
+                            <input type="checkbox" id="md_checkbox_23" name="checklist[]" value="purple" class="filled-in chk-col-purple myCheckBox"/>
+                            <label for="md_checkbox_23">PURPLE</label>
+                            <input type="checkbox" id="md_checkbox_24" name="checklist[]" value="deep-purple" class="filled-in chk-col-deep-purple myCheckBox"/>
+                            <label for="md_checkbox_24">DEEP PURPLE</label>
+                            <input type="checkbox" id="md_checkbox_25" name="checklist[]" value="indigo" class="filled-in chk-col-indigo myCheckBox"/>
+                            <label for="md_checkbox_25">INDIGO</label>         
+                            <input type="checkbox" id="md_checkbox_26" name="checklist[]" value="black" class="filled-in chk-col-black myCheckBox"/>
+                            <label for="md_checkbox_26">BLACK</label>                        
+                        </div>
+                    </div>
+                  
+                    <textarea class="textarea" id="description" name="description"></textarea>
+                    <div id="list-product-image" class="grid-list-img"> </div>
+                    <div class="row clearfix" style="margin-top: 15px;">
+                        <div class="from-group form-float">
+                            <div class="col-sm-12">
+                                <div class="form-line">
+                                    <label class="form-label">Ảnh (Lưu ý : Ảnh đầu tiên là ảnh đại diện )</label>
+                                    <input type="file" class="form-control" name="image" value="" id="file" multiple/>
+                                    <button id="btnAddImage" style="margin-top: 7px;">Thêm Ảnh</button>
+                                    <div id="loading">
+                                                <p><img src="/images/ajax-loader.gif"/>Vui lòng chờ !</p>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary waves-effect" id="addProduct"  >Thêm sản phẩm</button>
+                    </div>
+                   
+                  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function exportDiscountPrice(){
+        let price = $('#price').val();
+        if(price !=""){
+            let discount = parseInt($('#discount').val())
+            let value = parseInt(price);
+            let promotionPrice = value*(1-(discount/100))
+            $('#discountPrice').html(promotionPrice)
+        }
+    }
+    $('#discount').on('keyup',function(){
+        exportDiscountPrice()
+    })
+    $('#discount').on('input',function(){
+        let value = $(this).val()
+        if(value<0){
+            $(this).prop('value',0)
+            exportDiscountPrice();
+        }
+        if(value ==0)
+        {
+            exportDiscountPrice()
+        }
+    })
+
+    $(document).ready(function (e) {
+            $('#loading').hide();
+
+        });
+        $('#description').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 420,
+        });
+        $('#btnAddImage').click(function () {
+            $('#loading').show();
+            $('#btnAddImage').prop('disabled', true);
+            $('#file').prop('disabled', true);
+            // var file_data = $('#file').prop('files')[0];
+            var size = $('#file').prop('files').length;
+            console.log("size " + size)
+            if (size == 0) {
+                alert("vui lòng chọn ảnh !");
+            }
+            else {
+                for (let i = 0; i < size; i++) {
+                var file_data = $('#file').prop('files')[i];
+                var form_data = new FormData();
+                form_data.append('file', file_data);
+                // var form_data = new FormData();
+                // form_data.append('file', file_data);
+                $.ajax({
+                    url: '/upload', // point to server-side controller method
+                    cache: false,
+                    enctype: 'multipart/form-data',
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    method: 'POST',
+                    success: function (response) {
+                        $('#list-product-image').append('<div class="grid-item">\n' +
+                            '                                                                    <div class="img-container">\n' +
+                            '                                                                        <div class="img-div">\n' +
+                            '                                                                            <img src="' + response + '" alt="product img">\n' +
+                            '                                                                        </div>\n' +
+                            '                                                                    </div>\n' +
+                            '                                                                    <div class="remove-img" onclick="removeProductImage(this)">\n' +
+                            '                                                                        <i class="fas fa-times"></i>\n' +
+                            '                                                                    </div>\n' +
+                            '                                                                    \n' +
+                            '                                                                </div>');
+                        $('#loading').hide();
+                        $('#btnAddImage').prop('disabled', false);
+                        $('#file').prop('disabled', false);
+                    },
+                    error: function (response) {
+                        alert("ảnh không hợp lệ ! Vui lòng chọn ảnh khác hoặc xem lại định dạng ảnh ! ");
+                        $('#loading').hide();
+                        $('#btnAddImage').prop('disabled', false);
+                        $('#file').prop('disabled', false);
+                    }
+                });
+            }}
+        });
+        function removeProductImage(btn) {
+            $(btn).parent().remove();
+        }
+        $('#addProduct').click(function () {
+            var name = $('#productname').val();
+            var code = $('#productcode').val();
+            var quantity = $('#quantity').val();
+            var price = $('#price').val();
+            var category = $('#myselect').val().split('|');
+            var type = category[1];
+            var group = category[0];
+            var chieudai = $('#chieudai').val();
+            var chieurong = $('#chieurong').val();
+            var khoiluong = $('#khoiluong').val();
+            var selectBrand = $('#selectBrand').val();
+            var description = $('#description').val();
+            var options = [];
+            $("[name='option']").each(function(){
+                if($(this).val()!="")
+                {
+                    option.push($(this).val())
+                }
+            })
+            var features = {
+                width: chieudai,
+                height: chieurong,
+                weight: khoiluong,
+            }
+            console.log("type"+type);
+            console.log("group"+group);
+            var colors = [];
+            $('.myCheckBox').each(function () {
+                if (this.checked === true) {
+                    colors.push($(this).val());
+                }
+            });
+            var images = [];
+
+
+            $('#list-product-image .grid-item .img-container .img-div img').each(function () {
+                images.push($(this).attr('src'));
+            })
+            var data = {
+                productCode: code,
+                quantity: quantity,
+                price: price,
+                name: name,
+                brand: selectBrand,
+                features: features,
+                colors: colors,
+                group: group,
+                type: type,
+                options:options,
+                images: images,
+                description: description
+            };
+            var myJson  = JSON.stringify(data);
+            $.ajax({
+                url: '/product/add',
+                data: myJson,
+                type: 'post',
+                method: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            }
+            )
+        });
+
+        $("#btnAddChoice").click(function(){
+            var optionDiv = $("#option-div")
+            var inputOption = $(".input-option")
+            optionDiv.append(" <input type='text' name='option' value ='' placeholder='Lựa chọn'/>");
+        })
+        $("#btnRemoveChoice").click(function(){
+            var optionDiv = $("#option-div")
+            if(optionDiv.children().length>1)
+            {
+                optionDiv.children().last().remove()
+            }
+        })
+
+  </script>

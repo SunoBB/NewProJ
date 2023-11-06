@@ -1,0 +1,6 @@
+.order-header{
+    height: 50px;
+    padding-top: 5px;
+    color: white;
+    background: var(--primary-color);
+}

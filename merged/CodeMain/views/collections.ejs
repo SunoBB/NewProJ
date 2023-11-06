@@ -1,0 +1,661 @@
+<div class="bread-crumb-background">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="bread-crumb">
+                        <li class="bread-crumb-item">
+                            <a href="/" class="bread-crumb-heading">
+                                Trang Chủ
+                            </a>
+                        </li>
+                        <li class="bread-crumb-item">
+                            <i class="ti-angle-right"></i>
+                        </li>
+                        <li class="bread-crumb-item">
+                            <a href="/collections" class="bread-crumb-heading">
+                                Danh Mục
+                            </a>
+                        </li>
+                        <li class="bread-crumb-item">
+                            <i class="ti-angle-right"></i>
+                        </li>
+                        <li class="bread-crumb-item" style="text-transform: uppercase;">
+                            <%=type%>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            <nav class="category">
+                <h3 class="category__heading">
+                    Danh mục nhóm
+                </h3>
+                <ul class="category__list">
+                    <%if(locals.categories){%>
+                        <% locals.categories.forEach(cat=>{%>
+                            <li class="category__item">
+                                <a data-toggle="collapse" class="category__item-link collapsed"
+                                    style="text-transform: uppercase;">
+                                    <%=cat.group%>
+                                        <i class="ti-angle-right category__icon"></i>
+                                </a>
+
+                                <%if(cat.type.length>0){%>
+                                    <ul class="category__list-item collapse">
+                                        <% cat.type.forEach(t=>{%>
+                                            <li class="category__child-item">
+                                                <a href="/collections/<%= t%>" style="text-transform: uppercase;"
+                                                    class="category__child-item-link">
+                                                    <%=t%>
+                                                </a>
+                                            </li>
+                                            <%})%>
+                                    </ul>
+                                    <%}%>
+                            </li>
+                            <%})%>
+                                <%}%>
+
+
+                                    <!--                                     
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BÚT BRUSH CALLIGRAPHY</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BÚT GEL MỰC TRẮNG</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BÚT DẠ QUANG</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BÚT CHÌ PHÁC THẢO</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BÚT SƠN</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BÚT CHÌ KIM</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BÚT SẮT,MỰC VẼ</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">NGÒI CHÌ</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="category__item">
+                                    <a class="category__item-link" aria-expanded="false" data-toggle="collapse">
+                                        MÀU-MỰC
+                                        <i class="ti-angle-right category__icon"></i>
+                                    </a>
+                                    <ul class="category__list-item collapse">
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">MÀU NƯỚC</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">MÀU GOUACHE</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">MÀU ACRYLIC-OIL</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">MÀU POSTER</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">PHẤN TIÊN</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">MỰC VẼ</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">MÀU NGA</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="category__item">
+                                    <a class="category__item-link">
+                                        CHÌ MÀU
+                                        <i class="ti-angle-right category__icon"></i>
+                                    </a>
+                                    <ul class="category__list-item collapse" class="collapse">
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">CHÌ MÀU KHÔ</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">CHÌ MÀU NƯỚC</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="category__item">
+                                    <a  class="category__item-link">
+                                        SỔ-GIẤY
+                                        <i class="ti-angle-right category__icon"></i>
+                                    </a>
+                                    <ul class="category__list-item collapse">
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">SỔ VẼ</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">TỆP GIẤY RỜI</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">CANVAS</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">KLONG</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="category__item">
+                                    <a  class="category__item-link">
+                                        MARKER-BRUSH
+                                        <i class="ti-angle-right category__icon"></i>
+                                    </a>
+                                    <ul class="category__list-item collapse">
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">TOUCH MARRKER</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BÚT BRUSH TOMBOW</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">HIGH LIGHTER</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">BRUSH KHÁC</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="category__item">
+                                    <a class="category__item-link">
+                                        CỌ VẼ
+                                        <i class="ti-angle-right category__icon"></i>
+                                    </a>
+                                    <ul class="category__list-item collapse">
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">CỌ LÔNG</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">WATER BRUSH</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="category__item">
+                                    <a class="category__item-link">
+                                        PHỤ KIỆN
+                                        <i class="ti-angle-right category__icon"></i>
+                                    </a>
+                                    <ul class="category__list-item collapse">
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">NGÒI CHÌ</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">PALETTE</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">GÔM-TẨY</a>
+                                        </li>
+                                        <li class="category__child-item">
+                                            <a href="" class="category__child-item-link">DAO RỌC GIẤY</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="category__item">
+                                    <a href="" class="category__item-link">GIÁ VẼ & CANVAS</a>
+                                </li>
+                                <li class="category__item">
+                                    <a href="" class="category__item-link">BULLET JOURNAL</a>
+                                </li>
+                                <li class="category__item">
+                                    <a href="" class="category__item-link">MONT MARTE</a>
+                                </li>
+                                <li class="category__item">
+                                    <a href="" class="category__item-link">LIÊN HỆ</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <nav class="category">
+                            <h3 class="category__heading">
+                                Thương hiệu
+                            </h3>
+                            <ul class="category-brand__list category__list">
+                                <li class="category-brand__item category__item">
+                                    <label for="sakura">
+                                        <input type="checkbox" class="category-brand__input" id="sakura">
+                                        <span>Sakura</span>
+                                    </label>
+                                </li>
+                                <li class="category-brand__item category__item">
+                                    <label for="microsakura">
+                                        <input type="checkbox" class="category-brand__input" id="microsakura">
+                                        <span>MICRO SAKURA</span>
+                                    </label>
+                                </li>
+                                <li class="category-brand__item category__item">
+                                    <label for="Marvy">
+                                        <input type="checkbox" class="category-brand__input" id="Marvy">
+                                        <span>Marvy</span>
+                                    </label>
+                                </li>
+                                <li class="category-brand__item category__item">
+                                    <label for="khac">
+                                        <input type="checkbox" class="category-brand__input" id="khac">
+                                        <span>Khác</span>
+                                    </label>
+                                </li> -->
+                </ul>
+            </nav>
+            <nav class="category">
+                <h3 class="category__heading">
+                    Giá
+                </h3>
+                <ul class="category-price__list category__list">
+                    <li class="category-price__item category__item">
+                        <label for="cheapest">
+                            <input type="radio" name="price_filter"  value="100000" class="category-price__input"  id="cheapest">
+                            <span>Nhỏ hơn 100,000₫</span>
+                        </label>
+                    </li>
+                    <li class="category-price__item category__item">
+                        <label for="sizeS">
+                            <input type="radio" name="price_filter" value="100000-500000" class="category-price__input"  id="sizeS">
+                            <span>Từ 100,000₫ - 500,000₫</span>
+                        </label>
+                    </li>
+                    <li class="category-price__item category__item">
+                        <label for="sizeM">
+                            <input type="radio" name="price_filter" value="500000-1000000" class="category-price__input"  id="sizeM">
+                            <span>Từ 500,000₫ - 1,000,000₫</span>
+                        </label>
+                    </li>
+                    <li class="category-price__item category__item">
+                        <label for="sizeL">
+                            <input type="radio" name="price_filter" value="1000000-2000000" class="category-price__input"  id="sizeL">
+                            <span>Từ 1,000,000₫ - 2,000,000₫</span>
+                        </label>
+                    </li>
+                    <li class="category-price__item category__item">
+                        <label for="most">
+                            <input type="radio" name="price_filter" value="2000000" class="category-price__input"  id="most">
+                            <span>Lớn hơn 2,000,000₫</span>
+                        </label>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="category">
+                <h3 class="category__heading">
+                    Màu sắc
+                </h3>
+                <ul class="category-color__list category__list">
+                    <li class="category-color__item category-color--first">
+                        <label style="background-color: #fff;">
+                            <input type="checkbox" class="category-color__input" id="white">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #000;">
+                            <input type="checkbox" class="category-color__input" id="black">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #f44336;">
+                            <input type="checkbox" class="category-color__input" id="red">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #f06292;">
+                            <input type="checkbox" class="category-color__input" id="pink">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #9c27b0;">
+                            <input type="checkbox" class="category-color__input" id="violet">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #2196f3;">
+                            <input type="checkbox" class="category-color__input" id="blue">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #3f51b5;">
+                            <input type="checkbox" class="category-color__input" id="bluebold">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #4caf50;">
+                            <input type="checkbox" class="category-color__input" id="green">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #ffb74d;">
+                            <input type="checkbox" class="category-color__input" id="orange">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #cfd8dc;">
+                            <input type="checkbox" class="category-color__input" id="gray">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #8d6e63;">
+                            <input type="checkbox" class="category-color__input" id="brown">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                    <li class="category-color__item">
+                        <label style="background-color: #ffee58;">
+                            <input type="checkbox" class="category-color__input" id="yellow">
+                            <i class="ti-check category-color__choose"></i>
+                        </label>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="category">
+                <h3 class="category__heading">
+                    Số màu
+                </h3>
+                <ul class="category-number__list category__list">
+                    <li class="category-number__item category__item">
+                        <label for="12">
+                            <input type="checkbox" class="category-number__input" id="12">
+                            <span>12</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="15">
+                            <input type="checkbox" class="category-number__input" id="15">
+                            <span>15</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="18">
+                            <input type="checkbox" class="category-number__input" id="18">
+                            <span>18</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="24">
+                            <input type="checkbox" class="category-number__input" id="24">
+                            <span>24</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="25">
+                            <input type="checkbox" class="category-number__input" id="25">
+                            <span>25</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="30">
+                            <input type="checkbox" class="category-number__input" id="30">
+                            <span>30</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="33">
+                            <input type="checkbox" class="category-number__input" id="33">
+                            <span>33</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="36">
+                            <input type="checkbox" class="category-number__input" id="36">
+                            <span>36</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="40">
+                            <input type="checkbox" class="category-number__input" id="40">
+                            <span>40</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="42">
+                            <input type="checkbox" class="category-number__input" id="42">
+                            <span>42</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="48">
+                            <input type="checkbox" class="category-number__input" id="48">
+                            <span>48</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="60">
+                            <input type="checkbox" class="category-number__input" id="60">
+                            <span>60</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="72">
+                            <input type="checkbox" class="category-number__input" id="72">
+                            <span>72</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="100">
+                            <input type="checkbox" class="category-number__input" id="100">
+                            <span>100</span>
+                        </label>
+                    </li>
+                    <li class="category-number__item category__item">
+                        <label for="120">
+                            <input type="checkbox" class="category-number__input" id="120">
+                            <span>120</span>
+                        </label>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- PRODUCT -->
+        <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
+            <div class="row">
+                <div class="product-filter col-12">
+                    <span class="product-filter__label" style="text-transform: uppercase;">
+                        <%= type%>
+                    </span>
+                    <div class="product-filter__select">
+                        <span class="product-filter__heading">
+                            Sắp xếp theo:
+                        </span>
+                        <div class="select-input">
+                            <span class="select-input__label">
+                                Tên: A-Z
+                            </span>
+                            <i class="ti-angle-down select-input__icon"></i>
+                            <% let selectlink = `/collections/${type}?`%>
+                            <% if(typeof price_filter!="undefined") selectlink = selectlink+ `price_filter=${price_filter}&`%>
+                            <%selectlink = selectlink + `sort_by=`%>
+                            <ul class="select-input__list">
+                                <li class="select-input__item">
+                                    <a href="<%=selectlink%>popular" class="select-input__link">
+                                        Sản phẩm nổi bật
+                                    </a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="<%=selectlink%>price-ascending" class="select-input__link">
+                                        Giá: Tăng dần
+                                    </a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="<%=selectlink%>price-descending"
+                                        class="select-input__link">
+                                        Giá: Giảm dần
+                                    </a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="<%=selectlink%>title-ascending" class="select-input__link">
+                                        Tên: A-Z
+                                    </a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="<%=selectlink%>title-descending"
+                                        class="select-input__link">
+                                        Tên: Z-A
+                                    </a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="<%=selectlink%>oldest" class="select-input__link">
+                                        Cũ nhất
+                                    </a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="<%=selectlink%>lastest" class="select-input__link">
+                                        Mới nhất
+                                    </a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="" class="select-input__link">
+                                        Bán chạy nhất
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product">
+                    <% productList.forEach(product=>{%>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 product-card">
+                            <a href="/products/<%=product.productCode%>" class="product-item">
+                                <div class="product-item__img" style="background-image: url(<%=product.images[0]%>);">
+                                </div>
+                                <h2 class="product-item__name">
+                                    <%= product.name%>
+                                </h2>
+                                <div class="product-item__price">
+                                    <span class="product-item__price-new">
+                                        <%=product.price%>đ
+                                    </span>
+                                    <!-- <span class="product-item__price-old">
+                                            120,000₫
+                                        </span> -->
+                                </div>
+                                <!-- <div class="product-item__sale-off">
+                                        <span class="product-item__sale-off-percent">
+                                            -9%
+                                        </span>
+                                    </div> -->
+                            </a>
+                        </div>
+                        <%})%>
+
+                </div>
+
+                <!--PAGINATION-->
+                <div class="col-12">
+                    <nav>
+                        <% if(pages>0) {%>
+                            <% let link = `/collections/${type}?`%>
+                            <% if(sortby!="") link = link + `sortby=${sortby}&`%>
+                            <% if(typeof price_filter !== "undefined") link = link + `price_filter=${price_filter}&`;%>
+                            <% link = link +`page=`;%>
+                            
+                                <ul class="pagination home-product__pagination flex-wrap justify-content-center">
+                                    <% if (current===1){ %>
+                                        <li class="pagination-item">
+                                            <a href="<%=link%>1" class="pagination-item__link">
+                                                <i class="pagination-item__icon ti-angle-left"></i>
+                                            </a>
+                                        </li>
+                                        <% } else { %>
+                                            <li class="pagnation-item disabled">
+                                                <a class="pagination-item__link" href="#">First</a>
+                                            </li>
+                                            <% } %>
+                                                <!--ITEM-->
+                                                <% var i=(Number(current)>3)?(Number(current)-2):1; %>
+                                                    <% if(i!==1) { %>
+                                                        <li class="pagination-item disabled">
+                                                            <a class="pagination-item__link" href="#">...</a>
+                                                        </li>
+                                                        <% } %>
+                                                            <% for(;i<=(Number(current)+2)&& i<=pages;i++) { %>
+                                                                <% if(i==current) {%>
+                                                                    <li class="pagination-item active">
+                                                                        <a class="pagination-item__link"
+                                                                            href="<%=link%><%= i %>">
+                                                                            <%=i%>
+                                                                        </a>
+                                                                    </li>
+                                                                    <% } else { %>
+                                                                        <li class="pagination-item">
+                                                                            <a class="pagination-item__link"
+                                                                                href="<%=link%><%= i %>">
+                                                                                <%=i%>
+                                                                            </a>
+                                                                        </li>
+                                                                        <% } %>
+                                                                            <% if (i==Number(current) + 2 && i < pages)
+                                                                                { %>
+                                                                                <li class="pagination-item disabled">
+                                                                                    <a class="pagination-item__link"
+                                                                                        href="#">...</a>
+                                                                                </li>
+                                                                                <% } %>
+                                                                                    <% } %>
+                                                                                        <!--LAST ITEM-->
+                                                                                        <% if(current==pages) {%>
+                                                                                            <li
+                                                                                                class="pagination-item disabled">
+                                                                                                <a class="pagination-item__link"
+                                                                                                    href="#">
+                                                                                                    Last
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <% } else { %>
+                                                                                                <li
+                                                                                                    class="pagination-item">
+                                                                                                    <a class="pagination-item__link"
+                                                                                                        href="<%=link%><%= pages %>/">
+                                                                                                        Last
+                                                                                                    </a>
+                                                                                                </li>
+                                </ul>
+                                <% } %>
+                                    <% } %>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //Enable collapse for category 
+    let curPage = parseInt("<%=current%>")
+    let filterPrice = '<%=price_filter%>'
+    $('.category__item-link').click(function () {
+        var $target = $(this).next();
+        $target.collapse('toggle');
+    })
+    $("input[name='price_filter']").on('change',function(){
+        let priceFilter = $(this).prop("value");
+        window.location= `/collections/<%=type%>?price_filter=${priceFilter}`
+    })
+    $("input[name='price_filter']").each(function(){
+        if(this.value==filterPrice){
+            console.log(this.value)
+            $(this).prop('checked',true)
+        }
+    })
+    console.log($("input[name='price_filter']"))
+</script>

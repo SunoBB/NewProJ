@@ -1,0 +1,80 @@
+<%    const  numberWithCommas = (number)=>{
+            return number.toString().replace(
+                /\B(?=(\d{3})+(?!\d))/g,
+                ","
+            );
+        }
+        var total=0;
+        var totalpricee = 0;
+        customerCart.forEach(element => {
+            total+= parseInt(element.quantity);
+            totalpricee+= parseInt(element.quantity)*parseInt(element.price);
+        });
+%> 
+<div class="header__navbar-cart">
+    <a class="ti-shopping-cart" style="text-decoration: none;color:black;" href="/cart">
+        <span class="header__navbar-cart-notice"><%= total %> </span>
+    </a>
+    <div class="header__navbar-cart-box">
+        <div class="header__navbar-cart-mine">
+            <a href="/cart">Giỏ hàng của bạn</a>
+        </div>
+        <div class="header__navbar-ship">
+            <a href="/cart" class="header__navbar-ship-link">
+                Vận chuyển toàn quốc
+            </a>
+        </div>
+    </div>
+</div>
+<div class="header__cart-list header__cart--has-list">
+    <!-- NO CART: header__cart--no-list -->
+
+    <% if (customerCart.length>0) { %>
+        
+    <!-- HAS CART: header__cart--has-list -->
+    <ul class="header__cart-list-item">
+        <% customerCart.forEach(element => { %>
+            <li class="header__cart-item">
+                <a href="/products/<%= element.productCode %>" class="header__cart-img-link">
+                    <img src="<%= element.image %>" alt="" class="header__cart-img">
+                </a>
+                <div class="header__cart-info ml-2">
+                    <a href="" class="header__cart-item-name">
+                        <span><%= element.productname %></span>
+                    </a>
+                    <div class="header__cart-item-quantity">
+                        <span>Số lượng: <%= element.quantity %></span>
+                    </div>
+                    <div class="header__cart-item-price">
+                        <span>Giá: <%= numberWithCommas(element.price) %></span>
+                    </div>
+                </div>
+            </li>
+        <% }); %> 
+    </ul>
+    <% } else { %>
+        
+    <span class="">
+        Hiện chưa có sản phẩm
+    </span>
+    <% } %>
+    <span class="header__cart-list-line">
+    </span>
+    <div class="header__cart-pay">
+        <span class="header__cart-total">
+            TỔNG TIỀN: 
+        </span>
+        <span class="header__cart-money">
+            <%= numberWithCommas(totalpricee) %>₫
+        </span>
+    </div>
+    <div class="header__cart-function">
+        <a href="/cart" class="header__cart-link-to-cart">
+            XEM GIỎ HÀNG
+        </a>
+        <a href="#" value="<%=customerCart%>" onclick="checkOut(<%=customerCart.length%>)" class="header__cart-link-to-checkout">
+            THANH TOÁN
+        </a>
+    </div>
+
+</div>

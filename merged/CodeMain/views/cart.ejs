@@ -1,0 +1,253 @@
+<% var total = 0 ;
+   cart.forEach(element => {
+       var price = element.price * element.quantity;
+       total += price;
+   });
+   const  numberWithCommas = (number)=>{
+            return number.toString().replace(
+                /\B(?=(\d{3})+(?!\d))/g,
+                ","
+            );
+        }
+%> 
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 pd5">
+                <h3 class="cart-title">Giỏ hàng</h3>
+                <div class="table-main">
+                    <table class="table" id="tablecart">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% cart.forEach(element => { %>
+                                <tr id="<%= element.productCode %>">
+                                    <td class="thumbnail-img">
+                                        <a href="<%= '/products/'+element.productCode %> ">
+                                            <img class="img-fluid" src="<%= element.image %> " alt="" />
+                                        </a>
+                                    </td>
+                                    <td class="name-pr">
+                                        <a href="<%= '/products/'+element.productCode %> ">
+                                            <%= element.productname %> 
+                                        </a>
+                                    </td>
+                                    <td class="price-pr"><%= numberWithCommas(element.price) %></td>
+                                    <td class="quantity-box">
+                                        <input class="changeQuantity" type="number" size="4" data-id="" value="<%= element.quantity %>" min="0" step="1" style="width:80%">
+                                    </td>
+                                    <td class="total-pr" ><%= numberWithCommas(element.price * element.quantity) %></td>
+                                    <td class="remove-pr">
+                                        <a  data-id="" class="btn-delete" onclick="removeProduct(this)">
+                                            <i class="ti-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                           <% }); %> 
+                        </tbody>
+                    </table>
+                </div>
+                <!--BEGIN CART MOBILE-->
+                <div class="table-mobile">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="2" style="text-align: center;">Sản Phẩm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(cart.length > 0){%>
+                            <% cart.forEach(item =>{%>
+                            <tr class="thumbnail-img-mobile">
+                                <td><img class="img-fluid" src="<%= item.image%>" alt="" /></td>
+                                <td>
+                                    <a href="" class="name-mobile">
+                                        <%=item.productname%>
+                                    </a>
+                                    <!-- <p style="margin-bottom: 5px; color:orange">202 - Peach Pink</p> -->
+                                    <div class="price">
+                                        <!-- <span class="price-old">30,000₫</span> -->
+                                        <span class="price-new"><%=numberWithCommas(item.price)%>₫</span>
+                                    </div>
+                                    <div class="buttons_added">
+                                        <input class="minus is-form" type="button" value="-">
+                                        <input aria-label="quantity" class="input-qty" max="1000" min="1" name="" type="number" value="<%=item.quantity%>">
+                                        <input class="plus is-form" type="button" value="+">
+                                    </div>
+                                </td> 
+                            </tr>
+                            <%})%>
+                            <%} else {%>
+                                <tr>
+                                    <td style="text-align: center;">Giỏ hàng của bạn không có sản phẩm nào</td>
+                                </tr>
+                            <%}%>
+
+                            <!-- <tr>
+                                <td><img class="img-fluid" src="./assets/image/KuretakeZigKhangNuoc.jpg" alt="" /></td>
+                                <td>
+                                    <a href="" class="name-mobile">
+                                        Bút Cọ Gốc Nước Calligraphy Kuretake Fudebiyori 48 Màu - Bán Lẻ
+                                    </a>
+                                    <p style="margin-bottom: 5px; color:orange">202 - Peach Pink</p>
+                                    <div class="price">
+                                        <span class="price-old">30,000₫</span>
+                                        <span class="price-new">28,000₫</span>
+                                    </div>
+                                    <div class="buttons_added">
+                                        <input class="minus is-form" type="button" value="-">
+                                        <input aria-label="quantity" class="input-qty" max="1000" min="1" name="" type="number" value="1">
+                                        <input class="plus is-form" type="button" value="+">
+                                    </div>
+                                </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+                <!--END CART MOBILE-->
+                <div class="cart-btn__controls">
+                    <a id="btnUpdate" href="/collections/all" class="btn btn-theme">Mua Tiếp</a>
+                    <a id="btnContinue" class="btn btn-theme" style="color:#fff;">Cập Nhật Giỏ Hàng</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pd5">
+                <div class="order-box">
+                    <h3>Đơn hàng</h3>
+                    <div class="d-flex">
+                        <h4>Tổng tiền</h4>
+                        <div class="ml-auto font-weight-bold totalprice" id="oldtotal"><%= numberWithCommas(total) +'đ' %>  </div>
+                    </div>
+                    <div class="d-flex">
+                        <h4>Giảm giá</h4>
+                        <div class="ml-auto font-weight-bold">0₫ </div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="d-flex gr-total">
+                        <h5>Thành tiền</h5>
+                        <div class="ml-auto h5 totalprice" id="totalPrice" style="color:#e32124"><%= numberWithCommas(total) +'₫' %> </div>
+                    </div>
+                    <hr>
+                </div>
+                <div>
+                    <a href="#" onclick="checkOut(<%=customerCart.length%>)" class="ml-auto btn hvr" id="btnPayment">Tiến hành thanh toán</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  
+    const numberWithCommas = (number) => {
+        return number.toString().replace(
+            /\B(?=(\d{3})+(?!\d))/g,
+            ","
+        );
+    }
+    $('.changeQuantity').change(function () {
+        $(this).prop('disabled',true);
+        var quantity = $(this).val();
+        var note ;
+        var note2 ;
+        $(this).parent().parent().find('td').each(function (index, element) {
+            if (index == 2) note = parseInt($(element).text().replaceAll(",", ""));
+            if (index == 4) {
+                note2 =note * parseInt(quantity);
+                $(element).text(numberWithCommas(note2));
+            }
+        });
+
+        var code;
+        var code = $(this).parent().parent().attr('id');
+        console.log(code);
+        var json = {
+            code: code,
+            quantity: quantity,
+            typechange: 1
+        };
+        var myJson = JSON.stringify(json);
+
+        var test = [];
+        $('#tablecart').find("tr").each(function (index, element) {
+                    if (index > 0) {
+                        $(element).find('td').each(function (index, element) {
+                            if(index==4) test.push($(element).text().replaceAll(",",""));
+                        });
+                    }
+                }
+            );
+            console.log("test : "+test)
+         var newtotalPrice =0;
+         for (const i of test) {
+             console.log(i);
+            newtotalPrice+= parseInt(i);
+         }
+        //  test.forEach(element => {
+        //      newtotalPrice+= parseInt(element);
+        //  });
+         console.log(" total : "+newtotalPrice)
+        $.ajax({
+            url: '/cart/addOrUpdate',
+            data: myJson,
+            type: "post",
+            method: 'POST',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                if(data==1){
+                    $.notify("Opp ! Số hàng đặt vượt quá số lượng sản phẩm có sẵn !",{className: "warn"});
+                    setTimeout(function(){  location.reload(); }, 1000);
+                    return ;
+                }
+                $("#oldtotal").text(numberWithCommas(newtotalPrice) + 'đ');
+                $("#totalPrice").text(numberWithCommas(newtotalPrice) + 'đ');
+                $('.changeQuantity').prop('disabled',false);
+            },
+            error: function (data) {
+                console.log(data)
+                $('.changeQuantity').prop('disabled',false);
+            }
+        }
+        )
+    });
+    $('#btnContinue').click(function () {
+        location.reload();
+    })
+ 
+    function removeProduct(btn) {
+        var code = $(btn).parent().parent().attr('id');
+        var decrease = 0;
+        $(btn).parent().parent().find('td').each(function (index, element) {
+                            if(index==4) decrease= $(element).text().replaceAll(",","");
+                        });
+        decrease = parseInt(decrease);
+        console.log(decrease);
+        var oldtotal = $("#totalPrice").text().replaceAll(",","").replaceAll('đ','');  
+        console.log(oldtotal);
+        var newtotalPrice = parseInt(oldtotal)-decrease;
+        console.log(newtotalPrice);
+        $.ajax({
+            url: '/cart/delete/'+code,
+            type: "delete",
+            method: 'DELETE',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#oldtotal").text(numberWithCommas(newtotalPrice) + 'đ');
+                $("#totalPrice").text(numberWithCommas(newtotalPrice) + 'đ');
+                $(this).parent().parent().remove();
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data)
+            }
+        }
+        )
+            $(btn).parent().parent().remove();
+        }
+</script>

@@ -1,0 +1,71 @@
+<% const numberWithCommas=(number)=>{
+    return number.toString().replace(
+    /\B(?=(\d{3})+(?!\d))/g,
+    ","
+    );
+    }
+    %>
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-8 col-sm-12 pd5">
+                    <div class="title-left">
+                        <h3 class="card-title">Lịch sử đơn hàng</h3>
+                    </div>
+                    <div class="order-list row">
+                        <table class="table order-table">
+                            <thead class="order-table_head">
+                                <tr class="order-table__row">
+                                    <th class="order-table__row-title">
+                                        Mã đơn hàng
+                                    </th>
+                                    <th class="order-table__row-title">
+                                        Ngày đặt
+                                    </th>
+                                    <th class="order-table__row-title">
+                                        Trạng thái
+                                    </th>
+                                    <th class="order-table__row-title">
+                                        Tổng tiền
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="order-table_body">
+                                <% if(orders.length>0){%>
+                                    <%orders.forEach(order=>{%>
+                                        <tr>
+                                            <td>
+                                                <%= order._id%>
+                                            </td>
+                                            <td>
+                                                <%=(new Date(order.createdAt)).toLocaleString('en-GB')%>
+                                            </td>
+                                            <td>
+                                                <% if(order.status==1){%>
+                                                    <span class="badge badge-secondary">Đang xử lý</span>
+                                                    <%} else if(order.status==2) {%>
+                                                        <span class="badge badge-primary">Đã xác nhận</span>
+                                                        <%} else if(order.status==3) {%>
+                                                            <span class="badge badge-danger">Đang giao</span>
+                                                            <%} else if(order.status==4){%>
+                                                                <span class="badge badge-success">Đã giao</span>
+                                                                <%} else {%>
+                                                                    <span class="badge badge-dark">Đã hủy</span>
+                                                                    <%}%>
+                                            </td>
+                                            <td>
+                                                <%=numberWithCommas(order.totalprice)%>₫
+                                            </td>
+                                        </tr>
+                                        <%})%>
+                                            <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+    
+            </div>
+        </div>
+    </div>
